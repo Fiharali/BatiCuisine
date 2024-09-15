@@ -1,10 +1,12 @@
 package domain.entities;
 
-public  abstract  class Component {
+public class Component {
     private int id;
     private String name;
     private String componentType;
     private double vatRate;
+    private Project project;
+
 
 
     public Component(String name, String componentType, double vatRate) {
@@ -21,6 +23,13 @@ public  abstract  class Component {
     public Component() {
     }
 
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
+    }
 
     public int getId() {
         return id;
