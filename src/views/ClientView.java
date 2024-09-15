@@ -1,9 +1,6 @@
 package views;
 
-import domain.entities.Client;
-import domain.entities.Component;
-import domain.entities.Material;
-import domain.entities.Project;
+import domain.entities.*;
 import services.ClientService;
 import services.ComponentService;
 import services.ProjectService;
@@ -99,17 +96,40 @@ public void  createProject(Client client) {
 
             Component component = new Component(componentName,"material",tva);
             Material material = new Material(materialName,"material",unitCost,quantity,transportCost,qualityCoefficient);
-            boolean success = componentService.addComponentToProject(project , material, component);
+            boolean success = componentService.addComponentToProjectWithMaterial(project , material, component);
 
             System.out.println(success ? "Matériau ajouté avec succès !" : "Erreur lors de l'ajout du matériau.");
 
             String response = InputUtils.readString("Voulez-vous ajouter un autre matériau ? (y/n) : ");
             if ("n".equalsIgnoreCase(response)) {
                 addingMaterials = false;
+                addLaborToProject(project);
             }
         }
+    }
 
-        //clientService.allClients().forEach(System.out::println);
+    public void addLaborToProject(Project project) {
+        boolean addingLabor = true;
+        while (addingLabor) {
+            System.out.println("--- Ajout  de la main-d'œuvre ---");
+            String componentName = InputUtils.readString("Entrez le nom du component : ");
+            double tva = InputUtils.readDouble("Entrez le tva : ");
+
+            String name = InputUtils.readString("Entrez le nom du component  : ");
+            double hourlyrate = InputUtils.readDouble("Entrez le taux horaire de cette main-d'œuvre (€/h) : ");
+            double workhours = InputUtils.readDouble("Entrez le nombre d'heures travaillées: ");
+            double productivity = InputUtils.readDouble("Entrez le facteur de productivité (1.0 = standard, > 1.0 = haute productivité) : ");
+            Component component = new Component(componentName,"material",tva);
+            Labor labor = new Labor(name,"labor", workhours,hourlyrate, productivity);
+            boolean success = componentService.addComponentToProjectWithLabor(project , labor, component);
+
+            System.out.println(success ? "Matériau ajouté avec succès !" : "Erreur lors de l'ajout du matériau.");
+
+            String response = InputUtils.readString("Voulez-vous ajouter un autre matériau ? (y/n) : ");
+            if ("n".equalsIgnoreCase(response)) {
+                addingLabor = false;
+            }
+        }
     }
 
 }

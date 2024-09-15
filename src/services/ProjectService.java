@@ -28,7 +28,7 @@ public class ProjectService {
         return Optional.ofNullable(projectRepository.save(project));
     }
 
-    public boolean addMaterialToProject(Project project,Material material ,Component component) {
+    public boolean addMaterialToProject(Material material ,Component component) {
         material.setComponent(component);
         return materialRepository.save(material) != null;
     }
