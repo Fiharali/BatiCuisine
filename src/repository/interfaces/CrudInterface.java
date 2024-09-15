@@ -4,11 +4,12 @@ import java.util.List;
 import java.util.Optional;
 
 public interface CrudInterface<T> {
+    List<T> all();
+
     T save(T entity);
 
     Optional<T> findById(T t);
 
-    List<T> findAll();
 
     T update(T entity);
 

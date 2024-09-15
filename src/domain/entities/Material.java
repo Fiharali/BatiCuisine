@@ -5,10 +5,12 @@ public class Material extends Component{
     private double quantity;
     private double transportCost;
     private double qualityCoefficient;
+    private Component component;
 
 
-    public Material(String name, String componentType, double vatRate, double unitCost, double quantity, double transportCost, double qualityCoefficient) {
-        super(name, componentType, vatRate);
+
+    public Material(String name, String componentType, double unitCost, double quantity, double transportCost, double qualityCoefficient) {
+        super(name, componentType);
         this.unitCost = unitCost;
         this.quantity = quantity;
         this.transportCost = transportCost;
@@ -49,7 +51,13 @@ public class Material extends Component{
     public void setqualityCoefficient(double qualityCoefficient) {
         this.qualityCoefficient = qualityCoefficient;
     }
+    public Component getComponent() {
+        return component;
+    }
 
+    public void setComponent(Component component) {
+        this.component = component;
+    }
     @Override
     public String toString() {
         return "Material{" +

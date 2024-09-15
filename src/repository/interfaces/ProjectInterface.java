@@ -5,13 +5,13 @@ import java.util.Optional;
 
 public interface ProjectInterface <Project> extends CrudInterface<Project>{
     @Override
-    public Project save(Project entity);
+    public Project save(Project project);
 
     @Override
     public Optional<Project> findById(Project project);
 
     @Override
-    public List<Project> findAll();
+    public List<Project> all();
 
     @Override
     public Project update(Project entity);
