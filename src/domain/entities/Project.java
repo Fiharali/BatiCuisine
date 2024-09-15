@@ -28,6 +28,16 @@ public class Project {
         this.client=client;
 
     }
+    public Project( String name, double profitMargin, double totalCost , double surface , ProjectStatus status, Client client) {
+        this.name = name;
+        this.profitMargin = profitMargin;
+        this.totalCost = totalCost;
+        this.surface = surface;
+        this.listComponents=new ArrayList<>();
+        this.status= status;
+        this.client=client;
+
+    }
     public Project() {
         this.listComponents=new ArrayList<>();
     }

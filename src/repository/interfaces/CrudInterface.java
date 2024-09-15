@@ -10,6 +10,7 @@ public interface CrudInterface<T> {
 
     Optional<T> findById(T t);
 
+
     T update(T entity);
 
     boolean delete(T entity);
