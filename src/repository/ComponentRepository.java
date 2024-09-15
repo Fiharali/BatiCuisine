@@ -18,7 +18,7 @@ public class ComponentRepository implements ComponentInterface<Component> {
     }
 
     @Override
-    public List<Component> findAll() {
+    public List<Component> all() {
         return null;
     }
 

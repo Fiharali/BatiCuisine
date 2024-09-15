@@ -28,6 +28,22 @@ public class InputUtils {
         return value;
     }
 
+    public static String readString(String prompt) {
+        String value = "";
+        boolean valid = false;
+        while (!valid) {
+            System.out.print(prompt);
+            value = scanner.nextLine();
+            if (!value.trim().isEmpty()) {
+                valid = true;
+            } else {
+                System.out.println("Erreur : Veuillez entrer un texte valide.");
+            }
+        }
+        return value;
+    }
+
+
 
     public static Double readDouble(String prompt) {
         double value = 0;

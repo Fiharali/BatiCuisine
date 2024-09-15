@@ -55,3 +55,6 @@ CREATE TABLE Quotes (
 );
 
 
+alter table projects add column  surface DOUBLE PRECISION ;
+
+

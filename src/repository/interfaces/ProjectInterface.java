@@ -11,7 +11,7 @@ public interface ProjectInterface <Project> extends CrudInterface<Project>{
     public Optional<Project> findById(Project project);
 
     @Override
-    public List<Project> findAll();
+    public List<Project> all();
 
     @Override
     public Project update(Project entity);

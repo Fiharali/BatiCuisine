@@ -14,7 +14,7 @@ public interface ClientInterface <Client>  extends CrudInterface<Client> {
     public Optional<Client> findById(Client client);
 
     @Override
-    public List<Client> findAll();
+    public List<Client> all();
 
     @Override
     public Client update(Client client);

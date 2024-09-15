@@ -12,6 +12,10 @@ public  abstract  class Component {
         this.componentType = componentType;
         this.vatRate = vatRate;
     }
+    public Component(String name, String componentType) {
+        this.name = name;
+        this.componentType = componentType;
+    }
 
 
     public Component() {

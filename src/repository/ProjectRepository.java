@@ -18,7 +18,7 @@ public class ProjectRepository implements ProjectInterface<Project> {
     }
 
     @Override
-    public List<Project> findAll() {
+    public List<Project> all() {
         return List.of();
     }
 

@@ -3,5 +3,6 @@
   <component name="SqlDialectMappings">
     <file url="file://$PROJECT_DIR$/src/migration/script.sql" dialect="PostgreSQL" />
     <file url="file://$PROJECT_DIR$/src/migration/seeders.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/src/repository/ClientRepository.java" dialect="GenericSQL" />
   </component>
 </project>
