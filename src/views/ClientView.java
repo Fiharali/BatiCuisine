@@ -7,6 +7,7 @@ public class ClientView {
     public void chercheOrAjouterClient() {
         boolean exit = false;
         while (!exit) {
+
             System.out.println("Souhaitez-vous chercher un client existant ou en ajouter un nouveau ?");
             System.out.println(" 1. Chercher un client existant");
             System.out.println(" 2. Ajouter un nouveau client");
