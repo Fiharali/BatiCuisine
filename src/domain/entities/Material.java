@@ -20,11 +20,11 @@ public class Material extends Component{
     public Material() {
     }
 
-    public double getunitCost() {
+    public double getUnitCost() {
         return unitCost;
     }
 
-    public void setunitCost(double unitCost) {
+    public void setUnitCost(double unitCost) {
         this.unitCost = unitCost;
     }
 
@@ -44,11 +44,11 @@ public class Material extends Component{
         this.transportCost = transportCost;
     }
 
-    public double getqualityCoefficient() {
+    public double getQualityCoefficient() {
         return qualityCoefficient;
     }
 
-    public void setqualityCoefficient(double qualityCoefficient) {
+    public void setQualityCoefficient(double qualityCoefficient) {
         this.qualityCoefficient = qualityCoefficient;
     }
 

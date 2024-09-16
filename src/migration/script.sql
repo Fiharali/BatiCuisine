@@ -9,6 +9,8 @@ CREATE TABLE Clients (
 
 CREATE TYPE projectStatus AS ENUM ('inprogress', 'completed', 'cancelled');
 
+
+
 CREATE TABLE Projects (
                           id SERIAL PRIMARY KEY,
                           projectName VARCHAR(255) NOT NULL,
@@ -58,4 +60,8 @@ CREATE TABLE Quotes (
 alter table projects add column  surface DOUBLE PRECISION ;
 alter table components add column project_id int , ADD FOREIGN KEY (project_id) REFERENCES Projects(id) ON DELETE CASCADE ;
 
+CREATE TYPE new_projectStatus AS ENUM ('INPROGRESS', 'COMPLETED', 'CANCELLED');
 
+ALTER TABLE Projects
+    ALTER COLUMN status TYPE new_projectStatus
+        USING status::text::new_projectStatus;

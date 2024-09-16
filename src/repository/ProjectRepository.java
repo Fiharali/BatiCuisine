@@ -28,8 +28,8 @@ public class ProjectRepository implements ProjectInterface {
         try{
             PreparedStatement statement = connection.prepareStatement(sql,PreparedStatement.RETURN_GENERATED_KEYS);
             statement.setString(1, project.getName());
-            statement.setDouble(2, project.getprofitMargin());
-            statement.setDouble(3, project.gettotalCost());
+            statement.setDouble(2, project.getProfitMargin());
+            statement.setDouble(3, project.getTotalCost());
             // statement.setString(4, project.getStatus().name());
             statement.setDouble(4, project.getSurface());
             statement.setDouble(5, project.getClient().getId());

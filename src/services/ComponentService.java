@@ -19,8 +19,8 @@ public class ComponentService {
     }
 
     public boolean addComponentToProjectWithMaterial(Project project , Material material, Component component ) {
-        project.addComponent(material);
-        component.setProject(project);
+        //project.addComponent(material);
+       // component.setProject(project);
         component = componentRepository.save(component);
        if (component != null) {
            return projectService.addMaterialToProject(material,component);
@@ -31,8 +31,8 @@ public class ComponentService {
 
 
     public boolean addComponentToProjectWithLabor(Project project , Labor labor, Component component ) {
-        project.addComponent(labor);
-        component.setProject(project);
+       // project.addComponent(labor);
+       // component.setProject(project);
         component = componentRepository.save(component);
         project.addComponent(labor);
        if (component != null) {

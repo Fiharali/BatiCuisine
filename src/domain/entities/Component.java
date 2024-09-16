@@ -9,10 +9,10 @@ public class Component {
     private String componentType;
     private double vatRate;
     private Project project;
+    private Material material;
+    private Labor labor;
 
 
-    List<Material> materials;
-    List<Labor> labors;
 
 
 
@@ -20,20 +20,17 @@ public class Component {
         this.name = name;
         this.componentType = componentType;
         this.vatRate = vatRate;
-        this.labors = new ArrayList<>();
-        this.materials = new ArrayList<>();
+
     }
     public Component(String name, String componentType) {
         this.name = name;
         this.componentType = componentType;
-        this.labors = new ArrayList<>();
-        this.materials = new ArrayList<>();
+
     }
 
 
     public Component() {
-        this.labors = new ArrayList<>();
-        this.materials = new ArrayList<>();
+
     }
 
     public Project getProject() {
@@ -44,21 +41,23 @@ public class Component {
         this.project = project;
     }
 
-    public List<Material> getMaterials() {
-        return materials;
+    public Material getMaterial() {
+        return material;
     }
 
 
-    public void setMaterials(List<Material> materials) {
-        this.materials = materials;
+
+
+    public Labor getLabor() {
+        return labor;
     }
 
-    public List<Labor> getLabors() {
-        return labors;
+    public void setMaterial(Material material) {
+        this.material = material;
     }
 
-    public void setLabors(List<Labor> labors) {
-        this.labors = labors;
+    public void setLabor(Labor labor) {
+        this.labor = labor;
     }
 
     public int getId() {
