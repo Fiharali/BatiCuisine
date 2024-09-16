@@ -1,7 +1,6 @@
 package views;
 
 import domain.entities.*;
-import services.ComponentService;
 import services.ProjectService;
 import utils.InputUtils;
 
@@ -26,6 +25,10 @@ public ProjectView() {
         Optional<Project> project = projectService.createProject(projectName, surface,0,0,client);
         project.ifPresent(proj ->materialView.addMaterialToProject(proj) );
 
+    }
+
+    public Optional<Project> getProject(int id  ){
+      return   projectService.find(id);
     }
 
 

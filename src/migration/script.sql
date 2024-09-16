@@ -57,9 +57,17 @@ CREATE TABLE Quotes (
 );
 
 
+
+alter table Quotes add column validatedDate date;
+
 alter table projects add column  surface DOUBLE PRECISION ;
 alter table components add column project_id int , ADD FOREIGN KEY (project_id) REFERENCES Projects(id) ON DELETE CASCADE ;
 
+
+
+
+
+-- not yet
 CREATE TYPE new_projectStatus AS ENUM ('INPROGRESS', 'COMPLETED', 'CANCELLED');
 
 ALTER TABLE Projects

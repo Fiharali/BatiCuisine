@@ -2,6 +2,7 @@ package repository;
 
 import config.DBConnection;
 import domain.entities.Project;
+import domain.enums.ProjectStatus;
 import repository.interfaces.ProjectInterface;
 
 import java.sql.Connection;
@@ -49,7 +50,28 @@ public class ProjectRepository implements ProjectInterface {
 
     @Override
     public Optional<Project> findById(Project project) {
-        return Optional.empty();
+
+        String sql = "SELECT * FROM projects WHERE id = ?";
+
+        try {
+
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, project.getId());
+
+           ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+              project.setName(resultSet.getString("projectname"));
+              project.setProfitMargin(resultSet.getDouble("profitmargin"));
+              project.setTotalCost(resultSet.getDouble("totalcost"));
+              project.setSurface(resultSet.getDouble("surface"));
+              project.setStatus(ProjectStatus.valueOf("INPROGRESS"));
+            }
+
+            return Optional.of(project);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     @Override
