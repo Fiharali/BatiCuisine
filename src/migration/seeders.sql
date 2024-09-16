@@ -48,3 +48,45 @@ INSERT INTO Quotes (estimatedAmount, issuedate, isaccepted, project_id) VALUES
 
 delete from clients where id > 5;
 delete from projects where id > 5;
+
+
+select  * from clients;
+
+
+
+SELECT
+    c.id AS client_id,
+    c.name AS client_name,
+    c.address AS client_address,
+    c.phone AS client_phone,
+    c.is_professional AS client_is_professional,
+
+    p.id AS project_id,
+    p.projectName AS project_name,
+    p.profitMargin AS project_profit_margin,
+    p.totalCost AS project_total_cost,
+    p.surface AS project_surface,
+    p.status AS project_status,
+
+    comp.id AS component_id,
+    comp.name AS component_name,
+    comp.componentType AS component_type,
+    comp.vatRate AS component_vat_rate,
+
+    m.id AS material_id,
+    m.unitCost AS material_unit_cost,
+    m.quantity AS material_quantity,
+    m.transportCost AS material_transport_cost,
+    m.qualityCoefficient AS material_quality_coefficient,
+
+    l.id AS labor_id,
+    l.hourlyRate AS labor_hourly_rate,
+    l.workHours AS labor_work_hours,
+    l.workerProductivity AS labor_worker_productivity
+
+FROM Clients c
+         LEFT JOIN Projects p ON c.id = p.client_id
+         LEFT JOIN Components comp ON p.id = comp.project_id
+         LEFT JOIN Materials m ON comp.id = m.component_id
+         LEFT JOIN Labor l ON comp.id = l.component_id;
+

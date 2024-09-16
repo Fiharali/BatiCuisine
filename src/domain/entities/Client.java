@@ -32,6 +32,8 @@ public class Client {
         listProjects=new ArrayList<>();
     }
 
+
+
     public int getId() {
         return id;
     }
