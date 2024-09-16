@@ -34,7 +34,7 @@ public class ClientView {
                     exit = true;
                     break;
                 case 2:
-                    System.out.println("222");
+                    createNewClient();
                     exit = true;
                     break;
                 default:
@@ -64,6 +64,23 @@ public class ClientView {
                 },
                 () -> System.out.println("Client non trouvé.")
         );
+    }
+
+    public void createNewClient() {
+        System.out.println("--- ajouter nouveau  client  ---");
+        String name= InputUtils.readString("Entrez le nom du client  :  ");
+        String address= InputUtils.readString("Entrez l'address du client  :  ");
+        String phone= InputUtils.readString("Entrez le number du  client  :  ");
+        String isProfessionnelInput = InputUtils.readString("Le client est-il professionnel ? (y/n) : ");
+        boolean isProfessionel = "y".equalsIgnoreCase(isProfessionnelInput);
+
+        Optional<Client> client=  clientService.addClient(new Client(name,address,phone,isProfessionel));
+        String response = InputUtils.readString("Souhaitez-vous continuer avec ce client ? (y/n) : ");
+        if ("y".equalsIgnoreCase(response)) {
+            projectView.createProject(client.get());
+        } else {
+            System.out.println("Opération annulée.");
+        }
     }
 
 

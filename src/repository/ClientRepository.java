@@ -48,7 +48,26 @@ public class ClientRepository implements ClientInterface {
 
     @Override
     public Client save(Client client) {
-        return null;
+        String sql = "INSERT INTO clients (name, address, phone, is_professional) VALUES (?, ?, ?, ?)";
+
+        try{
+            PreparedStatement statement = connection.prepareStatement(sql,PreparedStatement.RETURN_GENERATED_KEYS);
+            statement.setString(1, client.getName());
+            statement.setString(2, client.getAddress());
+            statement.setString(3, client.getPhone());
+            statement.setBoolean(4, client.isProfessional());
+            int rowsAffected = statement.executeUpdate();
+            if (rowsAffected > 0) {
+                try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
+                    if (generatedKeys.next()) {
+                        client.setId((int) generatedKeys.getLong(1));
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return client;
     }
 
     @Override

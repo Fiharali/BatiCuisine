@@ -20,6 +20,10 @@ private ClientRepository clientRepository;
        return  clientRepository.all();
     }
 
+    public Optional<Client>  addClient(Client client) {
+        return Optional.of(clientRepository.save(client));
+    }
+
 
     public Optional<Client> findClientByName(String name) {
             return allClients().stream()
