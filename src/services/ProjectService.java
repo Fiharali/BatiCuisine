@@ -24,7 +24,7 @@ public class ProjectService {
     }
 
     public Optional<Project> createProject(String projectName, double surface ,double profit, double total, Client client) {
-        Project project = new Project(projectName,surface,profit,total, ProjectStatus.INPROGRESS,client);
+        Project project = new Project(projectName,profit,total,surface, ProjectStatus.INPROGRESS,client);
         return Optional.ofNullable(projectRepository.save(project));
     }
 

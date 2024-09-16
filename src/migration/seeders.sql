@@ -43,3 +43,7 @@ INSERT INTO Quotes (estimatedAmount, issuedate, isaccepted, project_id) VALUES
                                                                             (10000, '2024-09-15', true, 3),
                                                                             (8000, '2024-09-18', false, 4),
                                                                             (7000, '2024-09-20', true, 5);
+
+
+
+delete from projects where id > 5;
