@@ -32,6 +32,9 @@ public class ComponentService {
 
     public boolean addComponentToProjectWithLabor(Project project , Labor labor, Component component ) {
         project.addComponent(labor);
+        component.setProject(project);
+        component = componentRepository.save(component);
+        project.addComponent(labor);
        if (component != null) {
            return laborService.addLaborToProject(labor,component);
        };
