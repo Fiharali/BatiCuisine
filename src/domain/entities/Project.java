@@ -84,19 +84,19 @@ public class Project {
         this.name = name;
     }
 
-    public double getprofitMargin() {
+    public double getProfitMargin() {
         return profitMargin;
     }
 
-    public void setprofitMargin(double profitMargin) {
+    public void setProfitMargin(double profitMargin) {
         this.profitMargin = profitMargin;
     }
 
-    public double gettotalCost() {
+    public double getTotalCost() {
         return totalCost;
     }
 
-    public void settotalCost(double totalCost) {
+    public void setTotalCost(double totalCost) {
         this.totalCost = totalCost;
     }
 

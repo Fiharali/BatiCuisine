@@ -7,7 +7,6 @@ import domain.entities.Material;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
@@ -25,10 +24,10 @@ public class MaterialRepository  {
 
         try{
             PreparedStatement statement = connection.prepareStatement(sql,PreparedStatement.RETURN_GENERATED_KEYS);
-            statement.setDouble(1, material.getunitCost());
+            statement.setDouble(1, material.getUnitCost());
             statement.setDouble(2, material.getQuantity());
             statement.setDouble(3, material.getTransportCost());
-            statement.setDouble(4, material.getqualityCoefficient());
+            statement.setDouble(4, material.getQualityCoefficient());
             statement.setDouble(5, material.getComponent().getId());
             int rowsAffected = statement.executeUpdate();
 

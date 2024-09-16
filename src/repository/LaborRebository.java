@@ -3,7 +3,6 @@ package repository;
 import config.DBConnection;
 import domain.entities.Component;
 import domain.entities.Labor;
-import domain.entities.Material;
 
 
 import java.sql.Connection;
@@ -24,8 +23,8 @@ public class LaborRebository   {
 
         try{
             PreparedStatement statement = connection.prepareStatement(sql,PreparedStatement.RETURN_GENERATED_KEYS);
-            statement.setDouble(1, labor.gethourlyRate());
-            statement.setDouble(2, labor.getworkHours());
+            statement.setDouble(1, labor.getHourlyRate());
+            statement.setDouble(2, labor.getWorkHours());
             statement.setDouble(3, labor.getWorkerProductivity());
             statement.setDouble(4, labor.getComponent().getId());
             int rowsAffected = statement.executeUpdate();

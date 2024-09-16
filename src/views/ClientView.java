@@ -2,11 +2,8 @@ package views;
 
 import domain.entities.*;
 import services.ClientService;
-import services.ComponentService;
-import services.ProjectService;
 import utils.InputUtils;
 
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
@@ -91,44 +88,58 @@ public class ClientView {
             List<Client> clients = clientService.getAllClientsWithProjects();
 
             for (Client client : clients) {
-                System.out.println("Client ID: " + client.getId());
-                System.out.println("Client Name: " + client.getName());
-                System.out.println("Client Address: " + client.getAddress());
-                System.out.println("Client Phone: " + client.getPhone());
-                System.out.println("Is Professional: " + client.isProfessional());
-                System.out.println("-----");
+                System.out.println("\u001B[32m +-----------------+-----------------------+----------------------+----------------------+----------------------+");
+                System.out.println("| Client ID  : " + client.getId()
+                        + "        | Client Name  :" + client.getName()
+                        + "           | Client Address  :" + client.getAddress()
+                        + "     | Client Phone  : " + client.getPhone()
+                        + "        | Is Professional :  " + (client.isProfessional() ? "Yes    " : "No  ") );
+                System.out.println("+-----------------+-----------------------+----------------------+----------------------+----------------------+");
+                System.out.println("\u001B[0m|");
 
                 for (Project project : client.getListProjects()) {
-                    System.out.println("  Project ID: " + project.getId());
-                    System.out.println("  Project Name: " + project.getName());
-                    System.out.println("  Profit Margin: " + project.getprofitMargin());
-                    System.out.println("  Total Cost: " + project.gettotalCost());
-                    System.out.println("  Surface: " + project.getSurface());
-                    System.out.println("  Status: " + project.getStatus());
-                    System.out.println("  -----");
+                    System.out.println("\u001B[34m +-----------------+-----------------------+----------------------+----------------------+----------------------+----------------------+----------------------+");
+                    System.out.println("| Project ID : " + project.getId()
+                            + "      | Project Name : " + project.getName()
+                            + "          |Profit Margin : " + project.getProfitMargin()
+                            + "   | Total Cost : " + project.getTotalCost()
+                            + "   | mSurface : " + project.getSurface()
+                            + "   | Status : " + project.getStatus() );
+                    System.out.println("+-----------------+-----------------------+----------------------+----------------------+----------------------+----------------------+----------------------+");
+                    System.out.println("\u001B[0m|");
 
                     for (Component component : project.getListComponents()) {
-                        System.out.println("    Component ID: " + component.getId());
-                        System.out.println("    Component Name: " + component.getName());
-                        System.out.println("    Component Type: " + component.getComponentType());
-                        System.out.println("    VAT Rate: " + component.getVatRate());
-                        System.out.println("    -----");
+                        System.out.println("\u001B[33m +-----------------+-----------------------+----------------------+----------------------+----------------------+");
+                        System.out.println("| Component ID : " + component.getId()
+                                + "      | Component Name : " + component.getName()
+                                + "          | Component Type : " + component.getComponentType()
+                                + "   | VAT Rate : " + component.getVatRate());
+                        System.out.println("+-----------------+-----------------------+----------------------+----------------------+----------------------+");
+                        System.out.println("\u001B[0m|");
 
-                        for (Material material : component.getMaterials()) {
-                            System.out.println("      Material ID: " + material.getId());
-                            System.out.println("      Unit Cost: " + material.getunitCost());
-                            System.out.println("      Quantity: " + material.getQuantity());
-                            System.out.println("      Transport Cost: " + material.getTransportCost());
-                            System.out.println("      Quality Coefficient: " + material.getqualityCoefficient());
-                            System.out.println("      -----");
+                        // Material
+                        Material material = component.getMaterial();
+                        if (material != null) {
+                            System.out.println("\u001B[35m +-----------------+-----------------------+----------------------+----------------------+----------------------+");
+                            System.out.println("| Material ID : " + material.getId()
+                                    + "      | Unit Cost : " + material.getUnitCost()
+                                    + "          | Quantity : " + material.getQuantity()
+                                    + "   | Transport Cost : " + material.getTransportCost()
+                                    + "   | Quality Coefficient : " + material.getQualityCoefficient());
+                            System.out.println("+-----------------+-----------------------+----------------------+----------------------+----------------------+");
+                            System.out.println("\u001B[0m|");
                         }
 
-                        for (Labor labor : component.getLabors()) {
-                            System.out.println("      Labor ID: " + labor.getId());
-                            System.out.println("      Hourly Rate: " + labor.gethourlyRate());
-                            System.out.println("      Work Hours: " + labor.getworkHours());
-                            System.out.println("      Worker Productivity: " + labor.getWorkerProductivity());
-                            System.out.println("      -----");
+                        // Labor
+                        Labor labor = component.getLabor();
+                        if (labor != null) {
+                            System.out.println("\u001B[36m +-----------------+-----------------------+----------------------+----------------------+");
+                            System.out.println("| Labor ID : " + labor.getId()
+                                    + "      | Hourly Rate : " + labor.getHourlyRate()
+                                    + "          | Work Hours : " + labor.getWorkHours()
+                                    + "   | Worker Productivity : " + labor.getWorkerProductivity());
+                            System.out.println("+-----------------+-----------------------+----------------------+----------------------+");
+                            System.out.println("\u001B[0m|");
                         }
                     }
                 }
@@ -137,6 +148,13 @@ public class ClientView {
             System.err.println("Error retrieving client and project data: " + e.getMessage());
         }
     }
+
+
+
+
+
+
+
 
 
 

@@ -106,8 +106,8 @@ public class ClientRepository implements ClientInterface {
                     if (project.getId() == 0) {
                         project.setId(projectId);
                         project.setName(rs.getString("project_name"));
-                        project.setprofitMargin(rs.getDouble("project_profit_margin"));
-                        project.settotalCost(rs.getDouble("project_total_cost"));
+                        project.setProfitMargin(rs.getDouble("project_profit_margin"));
+                        project.setTotalCost(rs.getDouble("project_total_cost"));
                         project.setSurface(rs.getDouble("project_surface"));
                         project.setStatus(ProjectStatus.valueOf("INPROGRESS"));
                         project.setClient(client);
@@ -127,19 +127,20 @@ public class ClientRepository implements ClientInterface {
                         int materialId = rs.getInt("material_id");
                         if (materialId != 0) {
                             Material material = new Material();
-                            material.setunitCost(rs.getDouble("material_unit_cost"));
+                            material.setId(materialId);
+                            material.setUnitCost(rs.getDouble("material_unit_cost"));
                             material.setQuantity(rs.getDouble("material_quantity"));
                             material.setTransportCost(rs.getDouble("material_transport_cost"));
-                            material.setqualityCoefficient(rs.getDouble("material_quality_coefficient"));
-                            component.getMaterials().add(material);
+                            material.setQualityCoefficient(rs.getDouble("material_quality_coefficient"));
+                            component.setMaterial(material);
                         }
                         int laborId = rs.getInt("labor_id");
                         if (laborId != 0) {
                             Labor labor = new Labor();
-                            labor.sethourlyRate(rs.getDouble("labor_hourly_rate"));
-                            labor.setworkHours(rs.getDouble("labor_work_hours"));
+                            labor.setHourlyRate(rs.getDouble("labor_hourly_rate"));
+                            labor.setWorkHours(rs.getDouble("labor_work_hours"));
                             labor.setWorkerProductivity(rs.getDouble("labor_worker_productivity"));
-                            component.getLabors().add(labor);
+                            component.setLabor(labor);
                         }
                     }
                 }

@@ -17,19 +17,19 @@ public class Labor extends Component{
     public Labor() {
     }
 
-    public double gethourlyRate() {
+    public double getHourlyRate() {
         return hourlyRate;
     }
 
-    public void sethourlyRate(double hourlyRate) {
+    public void setHourlyRate(double hourlyRate) {
         this.hourlyRate = hourlyRate;
     }
 
-    public double getworkHours() {
+    public double getWorkHours() {
         return workHours;
     }
 
-    public void setworkHours(double workHours) {
+    public void setWorkHours(double workHours) {
         this.workHours = workHours;
     }
 
