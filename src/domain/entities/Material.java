@@ -51,6 +51,7 @@ public class Material extends Component{
     public void setqualityCoefficient(double qualityCoefficient) {
         this.qualityCoefficient = qualityCoefficient;
     }
+
     public Component getComponent() {
         return component;
     }

@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
-public class ComponentRepository implements ComponentInterface<Component> {
+public class ComponentRepository implements ComponentInterface {
     private Connection connection;
     public ComponentRepository() {
         this.connection = DBConnection.getConnection();

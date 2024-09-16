@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class ClientRepository implements ClientInterface<Client> {
+public class ClientRepository implements ClientInterface {
 
     private Connection connection;
     public ClientRepository() {
