@@ -15,12 +15,10 @@ public class ProjectService {
 
    private  ProjectRepository projectRepository ;
    private MaterialRepository materialRepository ;
-   private ComponentRepository componentRepository ;
 
     public ProjectService(){
         this.projectRepository = new ProjectRepository();
         this.materialRepository = new MaterialRepository();
-        this.componentRepository = new ComponentRepository();
     }
 
     public Optional<Project> createProject(String projectName, double surface ,double profit, double total, Client client) {

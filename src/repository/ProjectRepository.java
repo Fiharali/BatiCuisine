@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
-public class ProjectRepository implements ProjectInterface<Project> {
+public class ProjectRepository implements ProjectInterface {
 
 
     private Connection connection;
@@ -19,6 +19,7 @@ public class ProjectRepository implements ProjectInterface<Project> {
     public ProjectRepository() {
         this.connection = DBConnection.getConnection();
     }
+
 
     @Override
     public Project save(Project project) {
@@ -29,14 +30,14 @@ public class ProjectRepository implements ProjectInterface<Project> {
             statement.setString(1, project.getName());
             statement.setDouble(2, project.getprofitMargin());
             statement.setDouble(3, project.gettotalCost());
-           // statement.setString(4, project.getStatus().name());
+            // statement.setString(4, project.getStatus().name());
             statement.setDouble(4, project.getSurface());
             statement.setDouble(5, project.getClient().getId());
             int rowsAffected = statement.executeUpdate();
             if (rowsAffected > 0) {
                 try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
                     if (generatedKeys.next()) {
-                       project.setId((int) generatedKeys.getLong(1));
+                        project.setId((int) generatedKeys.getLong(1));
                     }
                 }
             }
@@ -57,12 +58,12 @@ public class ProjectRepository implements ProjectInterface<Project> {
     }
 
     @Override
-    public Project update(Project entity) {
-        return null;
+    public boolean delete(Project entity) {
+        return false;
     }
 
     @Override
-    public boolean delete(Project entity) {
-        return false;
+    public Project update(Project entity) {
+        return null;
     }
 }
