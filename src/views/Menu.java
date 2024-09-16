@@ -2,15 +2,18 @@ package views;
 
 import utils.InputUtils;
 
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class Menu {
 
 
 
-    public  static  void mainMenu() {
+    public  static  void mainMenu()  {
         boolean exit = false;
         ClientView clientView = new ClientView();
+        ProjectView projectView = new ProjectView();
+
         while (!exit) {
 
             System.out.println("\n  === Menu Principal ===");
@@ -23,6 +26,9 @@ public class Menu {
 
                 case 1:
                     clientView.chercheOrAjouterClient();
+                    break;
+                case 2:
+                    clientView.displayProjects();
                     break;
                 case 4:
                     exit = true;

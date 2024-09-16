@@ -20,8 +20,7 @@ public class Client {
         this.listProjects = listProjects;
     }
 
-    public Client(int id, String name, String address, String phone, boolean isProfessional) {
-        this.id = id;
+    public Client( String name, String address, String phone, boolean isProfessional) {
         this.name = name;
         this.address = address;
         this.phone = phone;
@@ -32,6 +31,8 @@ public class Client {
     public Client() {
         listProjects=new ArrayList<>();
     }
+
+
 
     public int getId() {
         return id;

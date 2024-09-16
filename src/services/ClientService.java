@@ -3,6 +3,7 @@ package services;
 import domain.entities.Client;
 import repository.ClientRepository;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -20,10 +21,19 @@ private ClientRepository clientRepository;
        return  clientRepository.all();
     }
 
+    public Optional<Client>  addClient(Client client) {
+        return Optional.of(clientRepository.save(client));
+    }
+
 
     public Optional<Client> findClientByName(String name) {
             return allClients().stream()
                     .filter(client -> client.getName().equalsIgnoreCase(name))
                     .findFirst();
+    }
+
+
+    public List<Client> getAllClientsWithProjects() {
+        return  clientRepository.getClientWithProjects();
     }
 }
