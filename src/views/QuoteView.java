@@ -2,6 +2,7 @@ package views;
 
 import domain.entities.Project;
 import domain.entities.Quote;
+import exceptions.ProjectsNotFoundException;
 import services.QuoteService;
 import utils.InputUtils;
 
@@ -39,14 +40,21 @@ public class QuoteView {
 
 
     public void addQuote(String projectName, LocalDate issueDate , LocalDate validateDate , int amount ){
-        Optional<Project> project = projectView.finfByName(projectName);
-        project.ifPresent(proj -> {
+        try {
+        Optional<Project> project = projectView.findfByName(projectName);
+        project.ifPresentOrElse((proj -> {
+
             Optional<Quote> quote = quoteService.addQuote(new Quote(amount, issueDate, validateDate, false, proj));
             quote.ifPresentOrElse(
                     q -> System.out.println("Devis enregistré avec succès !"),
                     () -> System.out.println("Le devis n'a pas été ajouté.")
             );
-        });
+
+         }), ()->System.out.println(" projct avec le nom  :  " + projectName +"  n'exist pas ")    );
+
+        } catch (ProjectsNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
 
     }
 }

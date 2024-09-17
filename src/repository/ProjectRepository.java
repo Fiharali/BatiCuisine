@@ -85,6 +85,7 @@ public class ProjectRepository implements ProjectInterface {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, project.getName());
 
+
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 project.setId(resultSet.getInt("id"));
@@ -93,9 +94,10 @@ public class ProjectRepository implements ProjectInterface {
                 project.setTotalCost(resultSet.getDouble("totalcost"));
                 project.setSurface(resultSet.getDouble("surface"));
                 project.setStatus(ProjectStatus.valueOf("INPROGRESS"));
+                return Optional.of(project);
             }
 
-            return Optional.of(project);
+            return Optional.empty();
         } catch (SQLException e) {
             throw new ProjectsNotFoundException("Project with name '" + project.getName() + "' not found.");
 
