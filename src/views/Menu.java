@@ -71,7 +71,7 @@ public  Menu(){
                   clientView.manageClient();
                   break;
               case 2:
-              //    clientView.deleteClient();
+                  projectView.manageProject();
                   break;
               case 0:
                   exit2 = true;
