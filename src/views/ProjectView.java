@@ -51,7 +51,7 @@ public ProjectView() {
             int choice = InputUtils.readInt("Choisissez une option :");
             switch (choice) {
                 case 1:
-                    //deleteClient();
+                    deleteProject();
                     break;
                 case 2:
                     displayProject();
@@ -86,6 +86,28 @@ public ProjectView() {
         );
     }
 
+
+    public void deleteProject(){
+        String name= InputUtils.readString("Entrez le nom du client  :  ");
+        Optional<Project> project = projectService.getProjectByName(name);
+        project.ifPresentOrElse(
+                prj -> {
+                    String response = InputUtils.readString("Souhaitez-vous supprimé  ce projet ? (y/n) : ");
+                    if ("y".equalsIgnoreCase(response)) {
+                        boolean isDeleted = projectService.deleteProject(prj);
+                        if (isDeleted) {
+                            System.out.println("projet été supprimé !");
+                        } else {
+                            System.out.println("projet ne peut pas être supprimé !");
+                        }
+                    } else {
+                        System.out.println("Opération annulée.");
+                    }
+                },
+                () -> System.out.println("projet non trouvé.")
+        );
+
+    }
 
 
 

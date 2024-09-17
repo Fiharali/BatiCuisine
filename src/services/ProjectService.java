@@ -44,5 +44,9 @@ public class ProjectService {
         return projectRepository.findByName(project);
     }
 
+    public boolean deleteProject(Project project) {
+        return projectRepository.delete(project);
+    }
+
 
 }
