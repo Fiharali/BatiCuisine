@@ -5,16 +5,16 @@ import repository.QuoteRepository;
 
 import java.util.Optional;
 
-public class DevisService {
+public class QuoteService {
 
     private QuoteRepository quoteRepository;
 
-    public DevisService() {
+    public QuoteService() {
         this.quoteRepository = new QuoteRepository();
     }
 
 
-    public Optional<Quote> addDevis (Quote quote) {
+    public Optional<Quote> addQuote (Quote quote) {
         return quoteRepository.save(quote);
 
     }

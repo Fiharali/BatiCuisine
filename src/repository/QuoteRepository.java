@@ -3,11 +3,13 @@ package repository;
 import config.DBConnection;
 import domain.entities.Client;
 import domain.entities.Quote;
+import repository.interfaces.QuoteInterface;
 
 import java.sql.*;
+import java.util.List;
 import java.util.Optional;
 
-public class QuoteRepository {
+public class QuoteRepository implements QuoteInterface {
     private Connection connection;
 
     public QuoteRepository() {
@@ -15,7 +17,7 @@ public class QuoteRepository {
     }
 
 
-        public Optional<Quote> save(Quote quote) {
+    public Optional<Quote> save(Quote quote) {
         String sql = "INSERT INTO quotes (estimatedamount, issuedate, validateddate, isaccepted ,project_id ) VALUES (?, ?, ?, ?,?)";
 
         try{
@@ -34,4 +36,25 @@ public class QuoteRepository {
         }
 
     }
+
+    @Override
+    public Optional<Quote> findById(Quote quote) {
+        return Optional.empty();
+    }
+
+    @Override
+    public List<Quote> all() {
+        return List.of();
+    }
+
+    @Override
+    public Quote update(Quote quote) {
+        return null;
+    }
+
+    @Override
+    public boolean delete(Quote quote) {
+        return false;
+    }
+
 }

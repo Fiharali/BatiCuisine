@@ -2,20 +2,20 @@ package views;
 
 import domain.entities.Project;
 import domain.entities.Quote;
-import services.DevisService;
+import services.QuoteService;
 import utils.InputUtils;
 
 import java.time.LocalDate;
 import java.util.Optional;
 
-public class DevisView {
+public class QuoteView {
 
     private ProjectView projectView;
-    private DevisService devisService;
+    private QuoteService quoteService;
 
-    public DevisView() {
+    public QuoteView() {
         this.projectView = new ProjectView();
-        this.devisService = new DevisService();
+        this.quoteService = new QuoteService();
     }
 
 
@@ -31,7 +31,7 @@ public class DevisView {
              Optional<Project> project = projectView.getProject(projectId);
             project.ifPresentOrElse(
                     proj -> {
-                        Optional<Quote> quote = devisService.addDevis(new Quote(amount,issueDate,validateDate,false,proj));
+                        Optional<Quote> quote = quoteService.addQuote(new Quote(amount,issueDate,validateDate,false,proj));
                         quote.ifPresentOrElse(
                                 q -> System.out.println("Devis enregistré avec succès !"),
                                 () -> System.out.println("Devis ne pas ajouter." + projectId + project.get().getName())

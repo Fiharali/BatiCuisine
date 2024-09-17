@@ -2,9 +2,6 @@ package views;
 
 import utils.InputUtils;
 
-import java.sql.SQLException;
-import java.util.Scanner;
-
 public class Menu {
 
 
@@ -13,7 +10,7 @@ public class Menu {
         boolean exit = false;
         ClientView clientView = new ClientView();
         ProjectView projectView = new ProjectView();
-        DevisView devisView = new DevisView();
+        QuoteView quoteView = new QuoteView();
 
         while (!exit) {
 
@@ -33,7 +30,7 @@ public class Menu {
                     clientView.displayProjects();
                     break;
                 case 4:
-                    devisView.ajouteQuote();
+                    quoteView.ajouteQuote();
                     break;
                 case 5:
                     exit = true;

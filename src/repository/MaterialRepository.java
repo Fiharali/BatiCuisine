@@ -3,6 +3,7 @@ package repository;
 import config.DBConnection;
 import domain.entities.Component;
 import domain.entities.Material;
+import repository.interfaces.MaterialInterface;
 //import repository.interfaces.ComponentInterface;
 
 import java.sql.Connection;
@@ -11,7 +12,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
-public class MaterialRepository  {
+public class MaterialRepository implements MaterialInterface {
     private Connection connection;
 
     public MaterialRepository() {
@@ -38,22 +39,22 @@ public class MaterialRepository  {
     }
 
 
-    public Optional<Component> findById(Component component) {
+    public Optional<Material> findById(Material material) {
         return Optional.empty();
     }
 
 
-    public List<Component> all() {
+    public List<Material> all() {
         return List.of();
     }
 
 
-    public Component update(Component component) {
+    public Material update(Material material) {
         return null;
     }
 
 
-    public boolean delete(Component component) {
+    public boolean delete(Material material) {
         return false;
     }
 }
