@@ -167,7 +167,7 @@ public class ClientView {
             int choice = InputUtils.readInt("Choisissez une option :");
             switch (choice) {
                 case 1:
-                    manageClient();
+                    deleteClient();
                     break;
                 case 2:
                    displayClient();
@@ -196,6 +196,29 @@ public class ClientView {
                 },
                 () -> System.out.println("Client non trouvé.")
         );
+    }
+
+
+    public void deleteClient(){
+        String name= InputUtils.readString("Entrez le nom du client  :  ");
+        Optional<Client> client = clientService.findClientByName(name);
+        client.ifPresentOrElse(
+                cli -> {
+                    String response = InputUtils.readString("Souhaitez-vous supprimé  ce client ? (y/n) : ");
+                    if ("y".equalsIgnoreCase(response)) {
+                        boolean isDeleted = clientService.deleteClient(cli);
+                        if (isDeleted) {
+                            System.out.println("Client supprimé !");
+                        } else {
+                            System.out.println("Client ne peut pas être supprimé !");
+                        }
+                    } else {
+                        System.out.println("Opération annulée.");
+                    }
+                },
+                () -> System.out.println("Client non trouvé.")
+        );
+
     }
 
 }
