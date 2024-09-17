@@ -85,7 +85,7 @@ public class ClientView {
     }
 
 
-    public void displayProjects() {
+    public void displayClientWithProjects() {
         try {
             List<Client> clients = clientService.getAllClientsWithProjects();
 
@@ -152,16 +152,64 @@ public class ClientView {
     }
 
 
+    public void  manageClient(){
+
+
+        boolean exit = false;
+        while (!exit) {
+
+            System.out.println("\n  === Menu de clients ===");
+            System.out.println("\n 1. supprimer un client  ");
+            System.out.println("\n 2. afficher un client  ");
+            System.out.println("\n 3. Modifier un client  ");
+            System.out.println("\n 0. retour");
+
+            int choice = InputUtils.readInt("Choisissez une option :");
+            switch (choice) {
+                case 1:
+                    manageClient();
+                    break;
+                case 2:
+                   displayClient();
+                    break;
+                case 0:
+                    exit = true;
+                default:
+                    System.out.println("Option invalide. Veuillez réessayer.");
+                    break;
+            }
+        }
+    }
 
 
 
 
-
-
-
-
-
-
-
+    public void displayClient(){
+        String name= InputUtils.readString("Entrez le nom du client  :  ");
+        Optional<Client> client = clientService.findClientByName(name);
+        client.ifPresentOrElse(
+                cli -> {
+                    System.out.println("Client trouvé !");
+                    System.out.println("Nom : " + cli.getName());
+                    System.out.println("Adresse : " + cli.getAddress());
+                    System.out.println("Numéro de téléphone : " + cli.getPhone());
+                },
+                () -> System.out.println("Client non trouvé.")
+        );
+    }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
