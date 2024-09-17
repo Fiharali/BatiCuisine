@@ -48,6 +48,7 @@ INSERT INTO Quotes (estimatedAmount, issuedate, isaccepted, project_id) VALUES
 
 delete from clients where id > 5;
 delete from projects where id > 5;
+delete from quotes where id > 5;
 
 
 select  * from clients;

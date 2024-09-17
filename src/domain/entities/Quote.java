@@ -1,23 +1,30 @@
 package domain.entities;
 
+import java.sql.Date;
 import java.time.LocalDate;
 
 public class Quote {
     private int id;
     private double estimatedAmount;
     private LocalDate issueDate;
+    private LocalDate validatedDate;
     private boolean isAccepted;
     private Project project;
 
-    public Quote(int id, double estimatedAmount, LocalDate issueDate, boolean isAccepted, Project project) {
-        this.id = id;
+    public Quote( double estimatedAmount, LocalDate issueDate, LocalDate validatedDate, boolean isAccepted, Project project) {
         this.estimatedAmount = estimatedAmount;
         this.issueDate = issueDate;
+        this.validatedDate = validatedDate;
         this.isAccepted = isAccepted;
         this.project = project;
     }
 
-    public Quote() {
+    public LocalDate getValidatedDate() {
+        return validatedDate;
+    }
+
+    public void setValidatedDate(LocalDate validatedDate) {
+        this.validatedDate = validatedDate;
     }
 
     public int getId() {

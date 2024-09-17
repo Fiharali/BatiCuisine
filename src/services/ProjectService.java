@@ -31,5 +31,18 @@ public class ProjectService {
         return materialRepository.save(material) != null;
     }
 
+    public Optional<Project> find(int id) {
+        Project project = new Project();
+        project.setId(id);
+        return projectRepository.findById(project);
+
+    }
+
+    public Optional<Project> getProjectByName(String name) {
+        Project project=new Project();
+        project.setName(name);
+        return projectRepository.findByName(project);
+    }
+
 
 }
