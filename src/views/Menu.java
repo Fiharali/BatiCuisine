@@ -61,8 +61,8 @@ public  Menu(){
       while (!exit2) {
 
           System.out.println("\n  === Menu Principal ===");
-          System.out.println("\n 1. Créer les clients  ");
-          System.out.println("\n 2. Créer les projects  ");
+          System.out.println("\n 1. gerér les clients  ");
+          System.out.println("\n 2. gerér les projects  ");
           System.out.println("\n 0. retour");
 
           int choice2 = InputUtils.readInt("Choisissez une option :");
@@ -71,7 +71,7 @@ public  Menu(){
                   clientView.manageClient();
                   break;
               case 2:
-                 // clientView.displayClientWithProjects();
+              //    clientView.deleteClient();
                   break;
               case 0:
                   exit2 = true;

@@ -32,6 +32,10 @@ private ClientRepository clientRepository;
                     .findFirst();
     }
 
+    public boolean deleteClient(Client client) {
+        return clientRepository.delete(client);
+    }
+
 
     public List<Client> getAllClientsWithProjects() {
         return  clientRepository.getClientWithProjects();

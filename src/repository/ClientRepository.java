@@ -41,9 +41,6 @@ public class ClientRepository implements ClientInterface {
             throw new RuntimeException(e);
         }
     }
-
-
-
     @Override
     public Client save(Client client) {
         String sql = "INSERT INTO clients (name, address, phone, is_professional) VALUES (?, ?, ?, ?)";
@@ -67,12 +64,10 @@ public class ClientRepository implements ClientInterface {
         }
         return client;
     }
-
     @Override
     public Optional<Client> findById(Client client) {
         return Optional.empty();
     }
-
     public List<Client> getClientWithProjects()   {
         List<Client> clients = new ArrayList<>();
         String query = "SELECT " +
@@ -154,7 +149,6 @@ public class ClientRepository implements ClientInterface {
 
 
     }
-
     private Client findOrCreateClient(List<Client> clients, int clientId) {
         for (Client client : clients) {
             if (client.getId() == clientId) {
@@ -165,7 +159,6 @@ public class ClientRepository implements ClientInterface {
         clients.add(newClient);
         return newClient;
     }
-
     private Project findOrCreateProject(List<Project> projects, int projectId) {
         for (Project project : projects) {
             if (project.getId() == projectId) {
@@ -176,7 +169,7 @@ public class ClientRepository implements ClientInterface {
         projects.add(newProject);
         return newProject;
     }
-        private Component findOrCreateComponent(List<Component> components, int componentId) {
+    private Component findOrCreateComponent(List<Component> components, int componentId) {
             for (Component component : components) {
                 if (component.getId() == componentId) {
                     return component;
@@ -188,7 +181,6 @@ public class ClientRepository implements ClientInterface {
         }
 
 
-
     @Override
     public Client update(Client client) {
         return null;
@@ -196,6 +188,15 @@ public class ClientRepository implements ClientInterface {
 
     @Override
     public boolean delete(Client client) {
-        return false;
+        String sql = "DELETE FROM clients WHERE id = ?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, client.getId());
+            int rowsAffected = preparedStatement.executeUpdate();
+            return rowsAffected > 0;
+
+        } catch (SQLException e) {
+                throw new RuntimeException(e);
+        }
     }
 }
