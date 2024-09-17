@@ -111,8 +111,17 @@ public class ProjectRepository implements ProjectInterface {
     }
 
     @Override
-    public boolean delete(Project entity) {
-        return false;
+    public boolean delete(Project project) {
+        String sql = "DELETE FROM projects WHERE id = ?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, project.getId());
+            int rowsAffected = preparedStatement.executeUpdate();
+            return rowsAffected > 0;
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
