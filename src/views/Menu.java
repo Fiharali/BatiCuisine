@@ -24,13 +24,13 @@ public class Menu {
             switch (choice) {
 
                 case 1:
-                    clientView.chercheOrAjouterClient();
+                    clientView.searchOrAjouterClient();
                     break;
                 case 2:
                     clientView.displayProjects();
                     break;
                 case 4:
-                    quoteView.ajouteQuote();
+                    quoteView.addQuoteInputs();
                     break;
                 case 5:
                     exit = true;

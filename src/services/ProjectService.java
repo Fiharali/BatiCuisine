@@ -38,5 +38,11 @@ public class ProjectService {
 
     }
 
+    public Optional<Project> getProjectByName(String name) {
+        Project project=new Project();
+        project.setName(name);
+        return projectRepository.findByName(project);
+    }
+
 
 }

@@ -31,6 +31,13 @@ public ProjectView() {
       return   projectService.find(id);
     }
 
+    public Optional<Project> finfByName(String name  ){
+        return   projectService.getProjectByName(name);
+    }
+
+
+
+
 
 
 

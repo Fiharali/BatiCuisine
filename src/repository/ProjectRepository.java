@@ -3,6 +3,7 @@ package repository;
 import config.DBConnection;
 import domain.entities.Project;
 import domain.enums.ProjectStatus;
+import exceptions.ProjectsNotFoundException;
 import repository.interfaces.ProjectInterface;
 
 import java.sql.Connection;
@@ -70,6 +71,34 @@ public class ProjectRepository implements ProjectInterface {
             return Optional.of(project);
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        }
+
+    }
+
+
+    public Optional<Project> findByName(Project project) {
+
+        String sql = "SELECT * FROM projects WHERE projectname = ?";
+
+        try {
+
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, project.getName());
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                project.setId(resultSet.getInt("id"));
+                project.setName(resultSet.getString("projectname"));
+                project.setProfitMargin(resultSet.getDouble("profitmargin"));
+                project.setTotalCost(resultSet.getDouble("totalcost"));
+                project.setSurface(resultSet.getDouble("surface"));
+                project.setStatus(ProjectStatus.valueOf("INPROGRESS"));
+            }
+
+            return Optional.of(project);
+        } catch (SQLException e) {
+            throw new ProjectsNotFoundException("Project with name '" + project.getName() + "' not found.");
+
         }
 
     }

@@ -18,7 +18,7 @@ public class ClientView {
         this.projectView = new ProjectView();
     }
 
-    public void chercheOrAjouterClient() {
+    public void searchOrAjouterClient() {
         boolean exit = false;
         while (!exit) {
 
@@ -64,6 +64,8 @@ public class ClientView {
                 () -> System.out.println("Client non trouvé.")
         );
     }
+
+
 
     public void createNewClient() {
         System.out.println("--- ajouter nouveau  client  ---");
