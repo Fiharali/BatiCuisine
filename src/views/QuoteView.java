@@ -58,7 +58,9 @@ public class QuoteView {
 
     }
 
+
     public void addQuoteAfterCreateProoject(Project project){
+
         try {
             LocalDate issueDate = InputUtils.readDate("Entrez la date d'émission du devis (format : jj/mm/aaaa) : ");
             LocalDate validateDate = InputUtils.readDate("Entrez la date validité du devis (format : jj/mm/aaaa) :");

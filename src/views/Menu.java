@@ -30,7 +30,8 @@ public  Menu(){
             switch (choice) {
 
                 case 1:
-                    //clientView.searchOrAjouterClient();
+                    clientView.searchOrAjouterClient();
+
                     break;
                 case 2:
                     clientView.displayClientWithProjects();

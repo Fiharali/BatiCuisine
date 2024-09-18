@@ -42,6 +42,7 @@ public class LaborView {
                 addingLabor = false;
                // quoteView.addQuoteAfterCreateProoject(project);
 
+
             }
         }
     }
