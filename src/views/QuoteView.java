@@ -57,4 +57,24 @@ public class QuoteView {
         }
 
     }
+
+    public void addQuotee(Project project){
+        try {
+            LocalDate issueDate = InputUtils.readDate("Entrez la date d'émission du devis (format : jj/mm/aaaa) : ");
+            LocalDate validateDate = InputUtils.readDate("Entrez la date validité du devis (format : jj/mm/aaaa) :");
+            Optional<Quote> quote = quoteService.addQuote(new Quote(0, issueDate, validateDate, false, project));
+            quote.ifPresentOrElse(
+                    q -> System.out.println("Devis enregistré avec succès !"),
+                    () -> System.out.println("Le devis n'a pas été ajouté.")
+            );
+            String response = InputUtils.readString("Souhaitez-vous afficher le projet avec ? (y/n) : ");
+            if ("y".equalsIgnoreCase(response)) {
+                System.out.println("affffffffi");
+            }
+
+        } catch (ProjectsNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+
+    }
 }
