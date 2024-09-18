@@ -31,6 +31,7 @@ public  Menu(){
 
                 case 1:
                     clientView.searchOrAjouterClient();
+
                     break;
                 case 2:
                     clientView.displayClientWithProjects();
