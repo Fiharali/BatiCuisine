@@ -20,15 +20,15 @@ public class LaborRebository  implements LaborInterface {
     }
 
     public Labor save(Labor labor) {
-        String sql = "INSERT INTO labor (hourlyrate, workhours, workerproductivity, labor_id) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO labor (hourlyrate, workhours, workerproductivity, component_id) VALUES (?, ?, ?, ?)";
 
         try{
             PreparedStatement statement = connection.prepareStatement(sql,PreparedStatement.RETURN_GENERATED_KEYS);
             statement.setDouble(1, labor.getHourlyRate());
             statement.setDouble(2, labor.getWorkHours());
             statement.setDouble(3, labor.getWorkerProductivity());
-            statement.setDouble(4, labor.getLabor().getId());
-            int rowsAffected = statement.executeUpdate();
+            statement.setDouble(4, labor.getComponent().getId());
+            statement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
