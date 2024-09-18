@@ -69,9 +69,10 @@ public class QuoteView {
                     q -> System.out.println("Devis enregistré avec succès !"),
                     () -> System.out.println("Le devis n'a pas été ajouté.")
             );
+            project.setQuote(quote.get());
             String response = InputUtils.readString("Souhaitez-vous afficher le projet avec ? (y/n) : ");
             if ("y".equalsIgnoreCase(response)) {
-                System.out.println("affffffffi");
+                System.out.println(project);
             }
 
         } catch (ProjectsNotFoundException e) {

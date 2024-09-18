@@ -88,5 +88,8 @@ FROM Clients c
          LEFT JOIN Projects p ON c.id = p.client_id
          LEFT JOIN Components comp ON p.id = comp.project_id
          LEFT JOIN Materials m ON comp.id = m.component_id
-         LEFT JOIN Labor l ON comp.id = l.component_id;
+         LEFT JOIN Labor l ON comp.id = l.component_id
+
+WHERE p.projectName = 'Office Buildout';
+
 

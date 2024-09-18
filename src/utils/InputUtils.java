@@ -92,4 +92,10 @@ public class InputUtils {
         return endDate;
     }
 
+
+    public  static void pause(String prompt) {
+        System.out.println(prompt);
+        scanner.nextLine();
+    }
+
 }
