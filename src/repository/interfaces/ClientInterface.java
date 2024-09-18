@@ -5,20 +5,15 @@ import domain.entities.Client;
 import java.util.List;
 import java.util.Optional;
 
-public interface ClientInterface <Client>  extends CrudInterface<Client> {
+public interface ClientInterface {
 
-    @Override
     public Client save(Client client);
 
-    @Override
     public Optional<Client> findById(Client client);
 
-    @Override
-    public List<Client> findAll();
+    public List<Client> all();
 
-    @Override
     public Client update(Client client);
 
-    @Override
     public boolean delete(Client client);
 }

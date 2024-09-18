@@ -7,22 +7,39 @@ import java.util.List;
 
 public class Project {
     private int id;
-    private String projectName;
+    private String name;
     private double profitMargin;
     private double totalCost;
+    private double surface;
     List<Component> listComponents;
     private ProjectStatus status;
     private Client client;
 
-    public Project(int id, String projectname, double profitMargin, double totalCost,String status,Client client) {
+    
+
+    public Project(int id, String name, double profitMargin, double totalCost , double surface , String status, Client client) {
         this.id = id;
-        this.projectName = projectname;
+        this.name = name;
         this.profitMargin = profitMargin;
         this.totalCost = totalCost;
+        this.surface = surface;
         this.listComponents=new ArrayList<>();
         this.status= ProjectStatus.valueOf(status);
         this.client=client;
 
+    }
+    public Project( String name, double profitMargin, double totalCost , double surface , ProjectStatus status, Client client) {
+        this.name = name;
+        this.profitMargin = profitMargin;
+        this.totalCost = totalCost;
+        this.surface = surface;
+        this.listComponents=new ArrayList<>();
+        this.status= status;
+        this.client=client;
+
+    }
+    public Project() {
+        this.listComponents=new ArrayList<>();
     }
 
     public ProjectStatus getStatus() {
@@ -41,7 +58,14 @@ public class Project {
         this.client = client;
     }
 
-    public Project() {
+ 
+
+    public double getSurface() {
+        return surface;
+    }
+
+    public void setSurface(double surface) {
+        this.surface = surface;
     }
 
     public int getId() {
@@ -52,27 +76,27 @@ public class Project {
         this.id = id;
     }
 
-    public String getprojectname() {
-        return projectName;
+    public String getName() {
+        return name;
     }
 
-    public void setprojectname(String projectname) {
-        this.projectName = projectname;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public double getprofitMargin() {
+    public double getProfitMargin() {
         return profitMargin;
     }
 
-    public void setprofitMargin(double profitMargin) {
+    public void setProfitMargin(double profitMargin) {
         this.profitMargin = profitMargin;
     }
 
-    public double gettotalCost() {
+    public double getTotalCost() {
         return totalCost;
     }
 
-    public void settotalCost(double totalCost) {
+    public void setTotalCost(double totalCost) {
         this.totalCost = totalCost;
     }
 
@@ -83,12 +107,15 @@ public class Project {
     public void setListComponents(List<Component> listComponents) {
         this.listComponents = listComponents;
     }
+    public void addComponent(Component component) {
+        this.listComponents.add(component);
+    }
 
     @Override
     public String toString() {
         return "Project{" +
                 "id=" + id +
-                ", projectname='" + projectName + '\'' +
+                ", name='" + name + '\'' +
                 ", profitMargin=" + profitMargin +
                 ", totalCost=" + totalCost +
                 '}';

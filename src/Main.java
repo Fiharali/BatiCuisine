@@ -1,10 +1,13 @@
 import config.DBConnection;
 import views.Menu;
 
-public class Main {
-    public static void main(String[] args) {
+import java.sql.SQLException;
 
-        Menu.mainMenu();
+public class Main {
+    public static void main(String[] args)  {
+
+        Menu menu = new Menu();
+        menu.mainMenu();
 
     }
 }
