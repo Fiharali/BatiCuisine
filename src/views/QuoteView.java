@@ -12,7 +12,7 @@ import java.util.Optional;
 public class QuoteView {
 
     private ProjectView projectView;
-    private QuoteService quoteService;
+    private QuoteService quoteService ;
 
     public QuoteView() {
         this.projectView = new ProjectView();
@@ -59,7 +59,7 @@ public class QuoteView {
     }
 
 
-    public void addQuoteAfterCreateProoject(Project project){
+    public  void addQuoteAfterCreateProoject(Project project){
 
         try {
             LocalDate issueDate = InputUtils.readDate("Entrez la date d'émission du devis (format : jj/mm/aaaa) : ");

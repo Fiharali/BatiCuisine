@@ -11,12 +11,12 @@ public class LaborView {
 
     public ComponentService componentService;
     public ComponentView componentView;
-    public QuoteView quoteView;
+    //public QuoteView quoteView = new QuoteView();
 
     public LaborView(){
         componentService = new ComponentService();
         componentView = new ComponentView();
-        quoteView = new QuoteView();
+       // quoteView = new QuoteView();
     };
 
     public Labor createLabor(Component component) {
@@ -40,7 +40,9 @@ public class LaborView {
             String response = InputUtils.readString("Voulez-vous ajouter un autre matériau ? (y/n) : ");
             if ("n".equalsIgnoreCase(response)) {
                 addingLabor = false;
-               // quoteView.addQuoteAfterCreateProoject(project);
+
+                QuoteView quoteView = new QuoteView();
+                quoteView.addQuoteAfterCreateProoject(project);
 
 
             }
