@@ -1,8 +1,9 @@
 package repository;
 
 import config.DBConnection;
-import domain.entities.Component;
 import domain.entities.Labor;
+import domain.entities.Labor;
+import repository.interfaces.LaborInterface;
 
 
 import java.sql.Connection;
@@ -11,7 +12,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
-public class LaborRebository   {
+public class LaborRebository  implements LaborInterface {
     private Connection connection;
 
     public LaborRebository() {
@@ -27,29 +28,29 @@ public class LaborRebository   {
             statement.setDouble(2, labor.getWorkHours());
             statement.setDouble(3, labor.getWorkerProductivity());
             statement.setDouble(4, labor.getComponent().getId());
-            int rowsAffected = statement.executeUpdate();
+            statement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
         return labor;
     }
 
-    public Optional<Component> findById(Component component) {
+    public Optional<Labor> findById(Labor labor) {
         return Optional.empty();
     }
 
 
-    public List<Component> all() {
+    public List<Labor> all() {
         return List.of();
     }
 
 
-    public Component update(Component component) {
+    public Labor update(Labor labor) {
         return null;
     }
 
 
-    public boolean delete(Component component) {
+    public boolean delete(Labor labor) {
         return false;
     }
 }

@@ -36,7 +36,6 @@ INSERT INTO Labor (component_id, hourlyrate, workhours, workerproductivity) VALU
                                                                                 (3, 25, 30, 1.2),
                                                                                 (4, 40, 15, 1.3);
 
-
 INSERT INTO Quotes (estimatedAmount, issuedate, isaccepted, project_id) VALUES
                                                                             (5000, '2024-09-10', true, 1),
                                                                             (3000, '2024-09-12', false, 2),
@@ -48,6 +47,7 @@ INSERT INTO Quotes (estimatedAmount, issuedate, isaccepted, project_id) VALUES
 
 delete from clients where id > 5;
 delete from projects where id > 5;
+delete from quotes where id > 5;
 
 
 select  * from clients;
