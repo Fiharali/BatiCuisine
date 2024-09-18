@@ -2,10 +2,11 @@ package services;
 
 import domain.entities.Quote;
 import repository.QuoteRepository;
+import services.interfaces.QuoteServiceInterface;
 
 import java.util.Optional;
 
-public class QuoteService {
+public class QuoteService implements QuoteServiceInterface {
 
     private QuoteRepository quoteRepository;
 
@@ -14,7 +15,8 @@ public class QuoteService {
     }
 
 
-    public Optional<Quote> addQuote (Quote quote) {
+    @Override
+    public Optional<Quote> addQuote(Quote quote) {
         return quoteRepository.save(quote);
 
     }
