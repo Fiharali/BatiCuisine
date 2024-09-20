@@ -65,14 +65,23 @@ public class QuoteView {
         try {
             LocalDate issueDate = LocalDate.now();
             LocalDate validateDate =  LocalDate.now().plusMonths(1);
+            System.out.println("Devis : ");
+            System.out.println("Montant : " + amount);
+            System.out.println("Date d'émission : " + issueDate);
+            System.out.println("Date de validité : " + validateDate);
+
             boolean isAccepted = "y".equalsIgnoreCase(InputUtils.readString("Vous voulez accepter ce devis ? (y/n) : "));
 
-            Optional<Quote> quote = quoteService.addQuote(new Quote(amount, issueDate, validateDate, isAccepted, project));
-            quote.ifPresentOrElse(
-                    q -> System.out.println("Devis enregistré avec succès !"),
-                    () -> System.out.println("Le devis n'a pas été ajouté.")
-            );
-            project.setQuote(quote.get());
+
+                Optional<Quote> quote = quoteService.addQuote(new Quote(amount, issueDate, validateDate, isAccepted, project));
+                quote.ifPresentOrElse(
+                        q -> System.out.println("Devis enregistré avec succès !"),
+                        () -> System.out.println("Le devis n'a pas été ajouté.")
+                );
+
+                project.setQuote(quote.get());
+
+
 
         } catch (ProjectsNotFoundException e) {
             System.out.println(e.getMessage());
