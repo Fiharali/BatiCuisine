@@ -49,4 +49,10 @@ public class ProjectService implements services.interfaces.ProjectServiceInterfa
     }
 
 
+    public  Optional<Project> getProjectWithClientAndComponent(Project project) {
+      return projectRepository.getProjectWithClientAndComponent(project);
+
+    }
+
+
 }

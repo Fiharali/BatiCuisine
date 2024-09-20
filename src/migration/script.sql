@@ -7,7 +7,7 @@ CREATE TABLE Clients (
 );
 
 
-CREATE TYPE projectStatus AS ENUM ('inprogress', 'completed', 'cancelled');
+CREATE TYPE projectStatus AS ENUM ('INPROGRESS', 'COMPLETED', 'CANCELED');
 
 
 
@@ -67,9 +67,3 @@ alter table components add column project_id int , ADD FOREIGN KEY (project_id) 
 
 
 
--- not yet
-CREATE TYPE new_projectStatus AS ENUM ('INPROGRESS', 'COMPLETED', 'CANCELLED');
-
-ALTER TABLE Projects
-    ALTER COLUMN status TYPE new_projectStatus
-        USING status::text::new_projectStatus;

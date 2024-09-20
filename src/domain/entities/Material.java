@@ -9,8 +9,8 @@ public class Material extends Component{
 
 
 
-    public Material(String name, String componentType, double unitCost, double quantity, double transportCost, double qualityCoefficient) {
-        super(name, componentType);
+    public Material( String componentType, double unitCost, double quantity, double transportCost, double qualityCoefficient) {
+        super( componentType);
         this.unitCost = unitCost;
         this.quantity = quantity;
         this.transportCost = transportCost;

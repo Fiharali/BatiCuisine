@@ -11,11 +11,11 @@ import java.util.Optional;
 
 public class QuoteView {
 
-    private ProjectView projectView;
+    //private ProjectView projectView;
     private QuoteService quoteService ;
 
     public QuoteView() {
-        this.projectView = new ProjectView();
+      //  this.projectView = new ProjectView();
         this.quoteService = new QuoteService();
     }
 
@@ -40,8 +40,9 @@ public class QuoteView {
 
 
     public void addQuote(String projectName, LocalDate issueDate , LocalDate validateDate , int amount ){
+        ProjectView projectView = new ProjectView();
         try {
-        Optional<Project> project = projectView.findfByName(projectName);
+         Optional<Project> project = projectView.findfByName(projectName);
         project.ifPresentOrElse((proj -> {
 
             Optional<Quote> quote = quoteService.addQuote(new Quote(amount, issueDate, validateDate, false, proj));
@@ -59,20 +60,19 @@ public class QuoteView {
     }
 
 
-    public  void addQuoteAfterCreateProoject(Project project){
+    public  void generateQuoteProoject(Project project , double amount){
 
         try {
-            LocalDate issueDate = InputUtils.readDate("Entrez la date d'émission du devis (format : jj/mm/aaaa) : ");
-            LocalDate validateDate = InputUtils.readDate("Entrez la date validité du devis (format : jj/mm/aaaa) :");
-            Optional<Quote> quote = quoteService.addQuote(new Quote(0, issueDate, validateDate, false, project));
+            LocalDate issueDate = LocalDate.now();
+            LocalDate validateDate =  LocalDate.now().plusMonths(1);
+            boolean isAccepted = "y".equalsIgnoreCase(InputUtils.readString("Vous voulez accepter ce devis ? (y/n) : "));
+
+            Optional<Quote> quote = quoteService.addQuote(new Quote(amount, issueDate, validateDate, isAccepted, project));
             quote.ifPresentOrElse(
                     q -> System.out.println("Devis enregistré avec succès !"),
                     () -> System.out.println("Le devis n'a pas été ajouté.")
             );
-            String response = InputUtils.readString("Souhaitez-vous afficher le projet avec ? (y/n) : ");
-            if ("y".equalsIgnoreCase(response)) {
-                System.out.println("affffffffi");
-            }
+            project.setQuote(quote.get());
 
         } catch (ProjectsNotFoundException e) {
             System.out.println(e.getMessage());

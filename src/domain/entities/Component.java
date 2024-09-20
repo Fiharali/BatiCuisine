@@ -27,6 +27,10 @@ public class Component {
         this.componentType = componentType;
 
     }
+    public Component( String componentType) {
+        this.componentType = componentType;
+
+    }
 
 
     public Component() {
@@ -97,7 +101,11 @@ public class Component {
         return "Component{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", tva='" + vatRate + '\'' +
                 ", componentType='" + componentType + '\'' +
+                ", vatRate=" + vatRate +
+                ", material=" + material +
+                ", labor=" + labor +
                 ", vatRate=" + vatRate +
                 '}';
     }

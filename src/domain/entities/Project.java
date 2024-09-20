@@ -14,8 +14,9 @@ public class Project {
     List<Component> listComponents;
     private ProjectStatus status;
     private Client client;
+    private Quote quote;
 
-    
+
 
     public Project(int id, String name, double profitMargin, double totalCost , double surface , String status, Client client) {
         this.id = id;
@@ -38,6 +39,16 @@ public class Project {
         this.client=client;
 
     }
+
+
+    public Quote getQuote() {
+        return quote;
+    }
+
+    public void setQuote(Quote quote) {
+        this.quote = quote;
+    }
+
     public Project() {
         this.listComponents=new ArrayList<>();
     }
@@ -118,6 +129,10 @@ public class Project {
                 ", name='" + name + '\'' +
                 ", profitMargin=" + profitMargin +
                 ", totalCost=" + totalCost +
+                //", qoute=" + quote +
+                ", client=" + client +
+                ", component=" + listComponents +
+
                 '}';
     }
 }

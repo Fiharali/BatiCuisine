@@ -24,7 +24,7 @@ public class ComponentService implements ComponentServiceInterface {
 
     @Override
     public boolean addComponentToProjectWithMaterial(Project project, Material material, Component component) {
-       // project.addComponent(material);
+      //  project.addComponent(material);
         component.setProject(project);
         component = componentRepository.save(component);
        if (component != null) {
