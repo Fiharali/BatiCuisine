@@ -65,7 +65,7 @@ public class QuoteView {
         try {
             LocalDate issueDate = LocalDate.now();
             LocalDate validateDate =  LocalDate.now().plusMonths(1);
-            System.out.println("Devis : ");
+            System.out.println("Devis --------------------------------------- ");
             System.out.println("Montant : " + amount);
             System.out.println("Date d'émission : " + issueDate);
             System.out.println("Date de validité : " + validateDate);
