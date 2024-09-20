@@ -27,6 +27,10 @@ public class Component {
         this.componentType = componentType;
 
     }
+    public Component( String componentType) {
+        this.componentType = componentType;
+
+    }
 
 
     public Component() {

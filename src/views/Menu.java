@@ -9,13 +9,13 @@ public class Menu {
     public QuoteView quoteView;
 
 
-public  Menu(){
-     clientView = new ClientView();
-     projectView = new ProjectView();
-     quoteView = new QuoteView();
-}
+    public  Menu(){
+         clientView = new ClientView();
+         projectView = new ProjectView();
+         quoteView = new QuoteView();
+    }
 
-    public   void mainMenu()  {
+    public  void mainMenu()  {
         boolean exit = false;
         while (!exit) {
 

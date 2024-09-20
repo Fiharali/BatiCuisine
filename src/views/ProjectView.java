@@ -11,10 +11,12 @@ public class ProjectView {
 
 private MaterialView  materialView;
 private ProjectService projectService;
+private QuoteView quoteView;
 
 public ProjectView() {
     materialView = new MaterialView();
     projectService = new ProjectService();
+    quoteView = new QuoteView();
 
 }
 
@@ -113,10 +115,9 @@ public void  createProject(Client client) {
     }
 
 
-    public void calculiProjectTotal(Project project) {
+    public  void calculiProjectTotal(Project project) {
         Optional<Project> projectOpt = projectService.getProjectWithClientAndComponent(project);
 
-        // Check if project exists
         if (projectOpt.isEmpty()) {
             System.out.println("Le projet est introuvable.");
             return;
@@ -124,66 +125,76 @@ public void  createProject(Client client) {
 
         Project currentProject = projectOpt.get();
 
-        // Print basic project information
         System.out.println("--- Résultat du Calcul---");
         System.out.println("Nom du projet : " + currentProject.getName());
         System.out.println("Client : " + currentProject.getClient().getName());
-        System.out.println("Adresse du chantier : " + currentProject.getClient().getAddress());
+        System.out.println("Adresse du  : " + currentProject.getClient().getAddress());
         System.out.println("Surface : " + currentProject.getSurface() + " m²");
 
-        // Use arrays to hold the total costs (arrays are mutable, so we can modify them within the lambda)
-        final double[] totalMaterialCostBeforeVAT = {0.0};
-        final double[] totalMaterialCostWithVAT = {0.0};
-        final double[] totalLaborCostBeforeVAT = {0.0};
-        final double[] totalLaborCostWithVAT = {0.0};
 
-        // Print cost details
+        double totalMaterialCostBeforeVAT = 0.0;
+        double totalMaterialCostWithVAT = 0.0;
+        double totalLaborCostBeforeVAT = 0.0;
+        double totalLaborCostWithVAT = 0.0;
+
         System.out.println("\n--- Détail des Coûts---");
 
-        // Process materials
         System.out.println("1. Matériaux :");
         for (Component component : currentProject.getListComponents()) {
-            Optional<Material> optionalMaterial = Optional.ofNullable(component.getMaterial());
-            optionalMaterial.ifPresent(material -> {
-                double materialCostBeforeVAT = material.getUnitCost() * material.getQuantity();
-                double materialCostWithVAT = materialCostBeforeVAT * (1 + material.getVatRate() / 100);
+            Material material = component.getMaterial();
+            if (material != null) {
+                double materialCostBeforeVAT = (material.getUnitCost() * material.getQuantity() * material.getQualityCoefficient()) + material.getTransportCost();
+                double materialCostWithVAT = materialCostBeforeVAT * (1 + component.getVatRate() / 100);
 
-                totalMaterialCostBeforeVAT[0] += materialCostBeforeVAT;
-                totalMaterialCostWithVAT[0] += materialCostWithVAT;
+                totalMaterialCostBeforeVAT += materialCostBeforeVAT;
+                totalMaterialCostWithVAT += materialCostWithVAT;
 
-                System.out.println("- " + material.getName() + " : " + String.format("%.2f", materialCostBeforeVAT) + " € (quantité : " + material.getQuantity() + ", coût unitaire : " + material.getUnitCost() + " €, qualité : " + material.getQualityCoefficient() + ", transport : " + material.getTransportCost() + ")");
-            });
+                System.out.println("-  " + component.getName() +  " : " + String.format("%.2f", materialCostBeforeVAT) + "," +  String.format("%.2f", materialCostWithVAT) + " € (quantité : " + material.getQuantity() + ", coût unitaire : " + material.getUnitCost() + " €, qualité : " + material.getQualityCoefficient() + ", transport : " + material.getTransportCost() + ") " + component.getVatRate());
+            }
         }
 
-        System.out.println("**Coût total des matériaux avant TVA : " + String.format("%.2f", totalMaterialCostBeforeVAT[0]) + " €**");
-        System.out.println("**Coût total des matériaux avec TVA (20%) : " + String.format("%.2f", totalMaterialCostWithVAT[0]) + " €**");
+        System.out.println("---  Coût total des matériaux avant TVA      : " + String.format("%.2f", totalMaterialCostBeforeVAT) + " €**");
+        System.out.println("---  Coût total des matériaux avec TVA (20%) : " + String.format("%.2f", totalMaterialCostWithVAT) + " €**");
 
-        // Process labor
+
         System.out.println("2. Main-d'œuvre :");
         for (Component component : currentProject.getListComponents()) {
-            Optional<Labor> optionalLabor = Optional.ofNullable(component.getLabor());
-            optionalLabor.ifPresent(labor -> {
-                double laborCostBeforeVAT = labor.getHourlyRate() * labor.getWorkHours();
-                double laborCostWithVAT = laborCostBeforeVAT * (1 + 20 / 100.0);
+            Labor labor = component.getLabor();
+            if (labor != null) {
+                double laborCostBeforeVAT = labor.getHourlyRate() * labor.getWorkHours() * labor.getWorkerProductivity();
+                double laborCostWithVAT = laborCostBeforeVAT * (1 + component.getVatRate() / 100.0);
 
-                totalLaborCostBeforeVAT[0] += laborCostBeforeVAT;
-                totalLaborCostWithVAT[0] += laborCostWithVAT;
+                totalLaborCostBeforeVAT += laborCostBeforeVAT;
+                totalLaborCostWithVAT += laborCostWithVAT;
 
-                System.out.println("- " + labor.getName() + " : " + String.format("%.2f", laborCostBeforeVAT) + " € (taux horaire : " + labor.getHourlyRate() + " €, heures travaillées : " + labor.getWorkHours() + ", productivité : " + labor.getWorkerProductivity() + ")");
-            });
+                System.out.println(" - "  + " : " + String.format("%.2f", laborCostBeforeVAT) + " € (taux horaire : " + labor.getHourlyRate() + " €, heures travaillées : " + labor.getWorkHours() + ", productivité : " + labor.getWorkerProductivity() + ")");
+            }
         }
 
-        System.out.println("**Coût total de la main-d'œuvre avant TVA : " + String.format("%.2f", totalLaborCostBeforeVAT[0]) + " €**");
-        System.out.println("**Coût total de la main-d'œuvre avec TVA (20%) : " + String.format("%.2f", totalLaborCostWithVAT[0]) + " €**");
+        System.out.println("---  Coût total de la main-d'œuvre avant TVA      : " + String.format("%.2f", totalLaborCostBeforeVAT) + " €**");
+        System.out.println("---  Coût total de la main-d'œuvre avec TVA  : " + String.format("%.2f", totalLaborCostWithVAT) + " €**");
 
-        // Calculate total costs
-        double totalCostBeforeMargin = totalMaterialCostBeforeVAT[0] + totalLaborCostBeforeVAT[0];
+
+        double totalCostBeforeMargin = totalMaterialCostBeforeVAT + totalLaborCostBeforeVAT;
         double profitMarginValue = totalCostBeforeMargin * (currentProject.getProfitMargin() / 100.0);
         double finalProjectCost = totalCostBeforeMargin + profitMarginValue;
 
-        System.out.println("3. Coût total avant marge : " + String.format("%.2f", totalCostBeforeMargin) + " €");
+        System.out.println("3. Coût total avant  le Marge bénéficiaire : " + String.format("%.2f", totalCostBeforeMargin) + " €");
         System.out.println("4. Marge bénéficiaire (" + currentProject.getProfitMargin() + "%): " + String.format("%.2f", profitMarginValue) + " €");
-        System.out.println("**Coût total final du projet : " + String.format("%.2f", finalProjectCost) + " €**");
+        System.out.println(" --- Coût total final du projet : " + String.format("%.2f", finalProjectCost) + " €**");
+
+        InputUtils.pause("Appuyez sur Entrée pour continuer...");
+
+        String response = InputUtils.readString("  ce projet appaetient à  : " + currentProject.getClient().getName() + " ce client est  " + (currentProject.getClient().isProfessional() ? "professionnel" : "particulier") + " voulez-vous appliquer une remise ? (y/n) : ");
+        if ("y".equalsIgnoreCase(response)) {
+            double discount = InputUtils.readDouble("Entrez le montant de la remise (en %) : ");
+            finalProjectCost = finalProjectCost - (finalProjectCost * discount / 100);
+            quoteView.generateQuoteProoject(currentProject , finalProjectCost);
+        } else {
+            System.out.println("Opération annulée.");
+        }
+
+
     }
 
 

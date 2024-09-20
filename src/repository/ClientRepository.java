@@ -64,10 +64,12 @@ public class ClientRepository implements ClientInterface {
         }
         return client;
     }
+
     @Override
     public Optional<Client> findById(Client client) {
         return Optional.empty();
     }
+
     public List<Client> getClientWithProjects()   {
         List<Client> clients = new ArrayList<>();
         String query = "SELECT " +

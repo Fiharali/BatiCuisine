@@ -21,7 +21,6 @@ public class QuoteRepository implements QuoteInterface {
         String sql = "INSERT INTO quotes (estimatedamount, issuedate, validateddate, isaccepted ,project_id ) VALUES (?, ?, ?, ?,?)";
 
         try{
-
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setDouble(1, quote.getEstimatedAmount());
             statement.setDate(2, Date.valueOf( quote.getIssueDate()));

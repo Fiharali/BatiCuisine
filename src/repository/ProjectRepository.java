@@ -23,14 +23,14 @@ public class ProjectRepository implements ProjectInterface {
 
     @Override
     public Project save(Project project) {
-        String sql = "INSERT INTO projects (projectname, profitmargin, totalcost, status, surface, client_id) VALUES (?, ?, ?, 'inprogress', ?, ?)";
+        String sql = "INSERT INTO projects (projectname, profitmargin, totalcost, status, surface, client_id) VALUES (?, ?, ?, 'INPROGRESS', ?, ?)";
 
         try{
             PreparedStatement statement = connection.prepareStatement(sql,PreparedStatement.RETURN_GENERATED_KEYS);
             statement.setString(1, project.getName());
             statement.setDouble(2, project.getProfitMargin());
             statement.setDouble(3, project.getTotalCost());
-            // statement.setString(4, project.getStatus().name());
+           // statement.setString(4, project.getStatus().name());
             statement.setDouble(4, project.getSurface());
             statement.setDouble(5, project.getClient().getId());
             int rowsAffected = statement.executeUpdate();
