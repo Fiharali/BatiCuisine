@@ -1,7 +1,6 @@
 package config;
 
 
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -16,9 +15,8 @@ public class DBConnection {
     private static Connection connection;
 
     public static Connection getConnection() {
-        if (connection == null) {
-            synchronized (DBConnection.class) {
-                if (connection == null) {
+     //   if (connection == null) {
+      //      synchronized (DBConnection.class) {
                     try {
                         Class.forName(DRIVER);
                         connection = DriverManager.getConnection(DB_URL + DB_NAME, USERNAME, PASSWORD);
@@ -26,10 +24,15 @@ public class DBConnection {
                     } catch (ClassNotFoundException | SQLException e) {
                         throw new RuntimeException("Failed to connect to the database", e);
                     }
-                }
-            }
-        }
+
+       //     }
+      //  }
 
         return connection;
     }
+
+
+
+
+
 }

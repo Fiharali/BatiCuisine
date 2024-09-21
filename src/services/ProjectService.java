@@ -54,5 +54,9 @@ public class ProjectService implements services.interfaces.ProjectServiceInterfa
 
     }
 
+    public Project updateProject(Project project) {
+        return projectRepository.update(project);
+    }
+
 
 }
