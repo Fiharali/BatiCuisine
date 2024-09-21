@@ -182,8 +182,6 @@ public class ClientView {
     }
 
 
-
-
     public void displayClient(){
         String name= InputUtils.readString("Entrez le nom du client  :  ");
         Optional<Client> client = clientService.findClientByName(name);

@@ -35,6 +35,9 @@ public class Menu {
                 case 2:
                     clientView.displayClientWithProjects();
                     break;
+                 case 3:
+                    projectView.displayProject();
+                    break;
                 case 4:
                     quoteView.addQuoteInputs();
                     break;

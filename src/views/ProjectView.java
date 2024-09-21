@@ -86,9 +86,19 @@ public void  createProject(Client client) {
                     System.out.println("etat : " + prj.getStatus());
                     System.out.println("total : " + prj.getTotalCost());
                     System.out.println("profit  : " + prj.getProfitMargin());
+
+                    String response = InputUtils.readString("Souhaitez-vous continuer avec ce projet ? (y/n) : ");
+                    if ("y".equalsIgnoreCase(response)) {
+                        calculiProjectTotal(project.get());
+                    } else {
+                        System.out.println("Opération annulée.");
+                    }
+
                 },
                 () -> System.out.println("projet non trouvé.")
         );
+
+
     }
 
 
@@ -154,7 +164,7 @@ public void  createProject(Client client) {
         }
 
         System.out.println("---  Coût total des matériaux avant TVA      : " + String.format("%.2f", totalMaterialCostBeforeVAT) + " €**");
-        System.out.println("---  Coût total des matériaux avec TVA (20%) : " + String.format("%.2f", totalMaterialCostWithVAT) + " €**");
+        System.out.println("---  Coût total des matériaux avec TVA  : " + String.format("%.2f", totalMaterialCostWithVAT) + " €**");
 
 
         System.out.println("2. Main-d'œuvre :");
@@ -167,7 +177,7 @@ public void  createProject(Client client) {
                 totalLaborCostBeforeVAT += laborCostBeforeVAT;
                 totalLaborCostWithVAT += laborCostWithVAT;
 
-                System.out.println(" - "  + " : " + String.format("%.2f", laborCostBeforeVAT) + " € (taux horaire : " + labor.getHourlyRate() + " €, heures travaillées : " + labor.getWorkHours() + ", productivité : " + labor.getWorkerProductivity() + ")");
+                System.out.println(" - "  + component.getName() +  " : " + String.format("%.2f", laborCostBeforeVAT) + " € (taux horaire : " + labor.getHourlyRate() + " €, heures travaillées : " + labor.getWorkHours() + ", productivité : " + labor.getWorkerProductivity() + ")");
             }
         }
 
@@ -183,18 +193,22 @@ public void  createProject(Client client) {
         System.out.println("4. Marge bénéficiaire (" + currentProject.getProfitMargin() + "%): " + String.format("%.2f", profitMarginValue) + " €");
         System.out.println(" --- Coût total final du projet : " + String.format("%.2f", finalProjectCost) + " €**");
 
-        InputUtils.pause("Appuyez sur Entrée pour continuer...");
+        project.setTotalCost(finalProjectCost);
+     //   projectService.updateProject(project);
 
-        String response = InputUtils.readString("  ce projet appaetient à  : " + currentProject.getClient().getName() + " ce client est  " + (currentProject.getClient().isProfessional() ? "professionnel" : "particulier") + " voulez-vous appliquer une remise ? (y/n) : ");
-        if ("y".equalsIgnoreCase(response)) {
-            double discount = InputUtils.readDouble("Entrez le montant de la remise (en %) : ");
-            finalProjectCost = finalProjectCost - (finalProjectCost * discount / 100);
-            quoteView.generateQuoteProoject(currentProject , finalProjectCost);
-        } else {
-            System.out.println("Opération annulée.");
+
+        if (finalProjectCost > 0) {
+            InputUtils.pause("Appuyez sur Entrée pour génére un devis ...");
+            String response = InputUtils.readString("  ce projet appaetient à  : " + currentProject.getClient().getName() + " ce client est  " + (currentProject.getClient().isProfessional() ? "professionnel" : "ne pas professionnel ") + " voulez-vous appliquer une remise ? (y/n) : ");
+            if ("y".equalsIgnoreCase(response)) {
+                double discount = InputUtils.readDouble("Entrez le montant de la remise (en %) : ");
+                finalProjectCost = finalProjectCost - (finalProjectCost * discount / 100);
+                quoteView.generateQuoteProoject(currentProject, finalProjectCost);
+            } else {
+                quoteView.generateQuoteProoject(currentProject, finalProjectCost);
+            }
+
         }
-
-
     }
 
 

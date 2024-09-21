@@ -231,8 +231,19 @@ public class ProjectRepository implements ProjectInterface {
     }
 
     @Override
-    public Project update(Project entity) {
-        return null;
+    public Project update(Project project) {
+
+        String sql = "UPDATE projects SET status = ?::projectstatus WHERE id = ?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, project.getStatus().name());
+            preparedStatement.setInt(2, project.getId());
+            preparedStatement.executeUpdate();
+            return project;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
 

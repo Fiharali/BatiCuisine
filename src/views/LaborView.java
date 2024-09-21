@@ -34,6 +34,7 @@ public class LaborView {
     public void addLaborToProject(Project project  ) {
         boolean addingLabor = true;
         while (addingLabor) {
+
             System.out.println("--- Ajout  de la main-d'œuvre ---");
             Component component = ComponentView.createComponent();
             Labor labor = createLabor(component);
@@ -43,9 +44,9 @@ public class LaborView {
             String response = InputUtils.readString("Voulez-vous ajouter un autre matériau ? (y/n) : ");
             if ("n".equalsIgnoreCase(response)) {
                 addingLabor = false;
-                InputUtils.pause("--- Calcul du coût total --- ");
-                ProjectView projectView = new ProjectView();
-                projectView.calculiProjectTotal(project);
+                InputUtils.pause("--- L'ajout de projet est terminé. --- ");
+                //ProjectView projectView = new ProjectView();
+              //  projectView.calculiProjectTotal(project);
 
             }
         }

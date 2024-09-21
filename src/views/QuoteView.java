@@ -2,7 +2,9 @@ package views;
 
 import domain.entities.Project;
 import domain.entities.Quote;
+import domain.enums.ProjectStatus;
 import exceptions.ProjectsNotFoundException;
+import services.ProjectService;
 import services.QuoteService;
 import utils.InputUtils;
 
@@ -13,10 +15,12 @@ public class QuoteView {
 
     //private ProjectView projectView;
     private QuoteService quoteService ;
+    private ProjectService projectService ;
 
     public QuoteView() {
       //  this.projectView = new ProjectView();
         this.quoteService = new QuoteService();
+        this.projectService = new ProjectService();
     }
 
 
@@ -63,23 +67,28 @@ public class QuoteView {
     public  void generateQuoteProoject(Project project , double amount){
 
         try {
-            LocalDate issueDate = LocalDate.now();
-            LocalDate validateDate =  LocalDate.now().plusMonths(1);
+            LocalDate issueDate = InputUtils.readDate("Entrez la date d'émission du devis (format : jj/mm/aaaa) : ");
+            LocalDate validateDate =  InputUtils.readEndDateAfterStart( "Entrez la date de validité du devis (format : jj/mm/aaaa) : " , issueDate);
             System.out.println("Devis ------------------------------------ ");
             System.out.println("Montant : " + amount);
             System.out.println("Date d'émission : " + issueDate);
             System.out.println("Date de validité : " + validateDate);
 
-            boolean isAccepted = "y".equalsIgnoreCase(InputUtils.readString("Vous voulez accepter ce devis ? (y/n) : "));
+            Quote quote = new Quote(amount, issueDate, validateDate, false, project);
+
+            String response = InputUtils.readString("Vous voulez accepter ce devis ? (y/n) :  ");
+            if ("y".equalsIgnoreCase(response)) {
+                quote.setAccepted(true);
+                project.setStatus(ProjectStatus.COMPLETED);
+                projectService.updateProject(project);
+                quoteService.addQuote(quote);
+            } else {
+                project.setStatus(ProjectStatus.CANCELLED);
+                quoteService.addQuote(quote);
+            }
 
 
-                Optional<Quote> quote = quoteService.addQuote(new Quote(amount, issueDate, validateDate, isAccepted, project));
-                quote.ifPresentOrElse(
-                        q -> System.out.println("Devis enregistré avec succès !"),
-                        () -> System.out.println("Le devis n'a pas été ajouté.")
-                );
-
-                project.setQuote(quote.get());
+               // project.setQuote(quote.get());
 
 
 
