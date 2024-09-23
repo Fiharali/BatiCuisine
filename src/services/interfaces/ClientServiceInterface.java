@@ -12,6 +12,8 @@ public interface ClientServiceInterface {
 
     Optional<Client> findClientByName(String name);
 
+    Optional<Client> findById(int id);
+
     boolean deleteClient(Client client);
 
     List<Client> getAllClientsWithProjects();

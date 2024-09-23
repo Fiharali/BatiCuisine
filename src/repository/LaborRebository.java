@@ -35,22 +35,5 @@ public class LaborRebository  implements LaborInterface {
         return labor;
     }
 
-    public Optional<Labor> findById(Labor labor) {
-        return Optional.empty();
-    }
 
-
-    public List<Labor> all() {
-        return List.of();
-    }
-
-
-    public Labor update(Labor labor) {
-        return null;
-    }
-
-
-    public boolean delete(Labor labor) {
-        return false;
-    }
 }

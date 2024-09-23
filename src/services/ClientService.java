@@ -4,8 +4,6 @@ import domain.entities.Client;
 import repository.ClientRepository;
 import services.interfaces.ClientServiceInterface;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,7 +34,7 @@ private ClientRepository clientRepository;
                     .findFirst();
     }
 
-
+     @Override
     public Optional<Client> findById(int id) {
         return allClients().stream()
                 .filter(client -> client.getId()==id)

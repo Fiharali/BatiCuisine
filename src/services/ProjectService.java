@@ -1,11 +1,8 @@
 package services;
 
 import domain.entities.Client;
-import domain.entities.Component;
-import domain.entities.Material;
 import domain.entities.Project;
 import domain.enums.ProjectStatus;
-import repository.ComponentRepository;
 import repository.MaterialRepository;
 import repository.ProjectRepository;
 
@@ -49,16 +46,18 @@ public class ProjectService implements services.interfaces.ProjectServiceInterfa
         return projectRepository.delete(project);
     }
 
-
-    public  Optional<Project> getProjectWithClientAndComponent(Project project) {
+    @Override
+    public Optional<Project> getProjectWithClientAndComponent(Project project) {
       return projectRepository.getProjectWithClientAndComponent(project);
 
     }
 
+    @Override
     public Project updateProject(Project project) {
         return projectRepository.update(project);
     }
 
+    @Override
     public List<Project> findAll(){
         return projectRepository.all();
     }

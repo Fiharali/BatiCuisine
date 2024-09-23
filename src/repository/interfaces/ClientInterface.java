@@ -13,7 +13,6 @@ public interface ClientInterface {
 
     public List<Client> all();
 
-    public Client update(Client client);
 
     public boolean delete(Client client);
 }
