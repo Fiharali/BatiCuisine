@@ -211,9 +211,31 @@ public class ProjectRepository implements ProjectInterface {
 
     }
 
+
+
     @Override
     public List<Project> all() {
-        return List.of();
+        List<Project> projects = new ArrayList<>();
+        String sql = "SELECT projects.* , clients.name username FROM projects inner join clients on projects.client_id = clients.id";
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+            while (resultSet.next()) {
+                Project project = new Project();
+                project.setId(resultSet.getInt("id"));
+                project.setName(resultSet.getString("projectname"));
+                project.setProfitMargin(resultSet.getDouble("profitmargin"));
+                project.setTotalCost(resultSet.getDouble("totalcost"));
+                project.setSurface(resultSet.getDouble("surface"));
+                project.setStatus(ProjectStatus.valueOf(resultSet.getString("status")));
+                projects.add(project);
+             //   project.getClient().setName(resultSet.getString("username"));
+
+            }
+            return projects;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override

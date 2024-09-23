@@ -85,71 +85,71 @@ public class ClientView {
     }
 
 
-    public void displayClientWithProjects() {
-        try {
-            List<Client> clients = clientService.getAllClientsWithProjects();
-
-            for (Client client : clients) {
-                System.out.println("\u001B[32m +-----------------+-----------------------+----------------------+----------------------+----------------------+");
-                System.out.println("| Client ID  : " + client.getId()
-                        + "        | Client Name  :" + client.getName()
-                        + "           | Client Address  :" + client.getAddress()
-                        + "     | Client Phone  : " + client.getPhone()
-                        + "        | Is Professional :  " + (client.isProfessional() ? "Yes    " : "No  ") );
-                System.out.println("+-----------------+-----------------------+----------------------+----------------------+----------------------+");
-                System.out.println("\u001B[0m|");
-
-                for (Project project : client.getListProjects()) {
-                    System.out.println("\u001B[34m +-----------------+-----------------------+----------------------+----------------------+----------------------+----------------------+----------------------+");
-                    System.out.println("| Project ID : " + project.getId()
-                            + "      | Project Name : " + project.getName()
-                            + "          |Profit Margin : " + project.getProfitMargin()
-                            + "   | Total Cost : " + project.getTotalCost()
-                            + "   | mSurface : " + project.getSurface()
-                            + "   | Status : " + project.getStatus() );
-                    System.out.println("+-----------------+-----------------------+----------------------+----------------------+----------------------+----------------------+----------------------+");
-                    System.out.println("\u001B[0m|");
-
-                    for (Component component : project.getListComponents()) {
-                        System.out.println("\u001B[33m +-----------------+-----------------------+----------------------+----------------------+----------------------+");
-                        System.out.println("| Component ID : " + component.getId()
-                                + "      | Component Name : " + component.getName()
-                                + "          | Component Type : " + component.getComponentType()
-                                + "   | VAT Rate : " + component.getVatRate());
-                        System.out.println("+-----------------+-----------------------+----------------------+----------------------+----------------------+");
-                        System.out.println("\u001B[0m|");
-
-                        // Material
-                        Material material = component.getMaterial();
-                        if (material != null) {
-                            System.out.println("\u001B[35m +-----------------+-----------------------+----------------------+----------------------+----------------------+");
-                            System.out.println("| Material ID : " + material.getId()
-                                    + "      | Unit Cost : " + material.getUnitCost()
-                                    + "          | Quantity : " + material.getQuantity()
-                                    + "   | Transport Cost : " + material.getTransportCost()
-                                    + "   | Quality Coefficient : " + material.getQualityCoefficient());
-                            System.out.println("+-----------------+-----------------------+----------------------+----------------------+----------------------+");
-                            System.out.println("\u001B[0m|");
-                        }
-
-                        // Labor
-                        Labor labor = component.getLabor();
-                        if (labor != null) {
-                            System.out.println("\u001B[36m +-----------------+-----------------------+----------------------+----------------------+");
-                            System.out.println("| Labor ID : " + labor.getId()
-                                    + "      | Hourly Rate : " + labor.getHourlyRate()
-                                    + "          | Work Hours : " + labor.getWorkHours()
-                                    + "   | Worker Productivity : " + labor.getWorkerProductivity());
-                            System.out.println("+-----------------+-----------------------+----------------------+----------------------+");
-                            System.out.println("\u001B[0m|");
-                        }
-                    }
-                }
-            }
-        } catch (Exception e) {
-            System.err.println("Error retrieving client and project data: " + e.getMessage());
-        }
-    }
+//    public void displayClientWithProjects() {
+//        try {
+//            List<Client> clients = clientService.getAllClientsWithProjects();
+//
+//            for (Client client : clients) {
+//                System.out.println("\u001B[32m +-----------------+-----------------------+----------------------+----------------------+----------------------+");
+//                System.out.println("| Client ID  : " + client.getId()
+//                        + "        | Client Name  :" + client.getName()
+//                        + "           | Client Address  :" + client.getAddress()
+//                        + "     | Client Phone  : " + client.getPhone()
+//                        + "        | Is Professional :  " + (client.isProfessional() ? "Yes    " : "No  ") );
+//                System.out.println("+-----------------+-----------------------+----------------------+----------------------+----------------------+");
+//                System.out.println("\u001B[0m|");
+//
+//                for (Project project : client.getListProjects()) {
+//                    System.out.println("\u001B[34m +-----------------+-----------------------+----------------------+----------------------+----------------------+----------------------+----------------------+");
+//                    System.out.println("| Project ID : " + project.getId()
+//                            + "      | Project Name : " + project.getName()
+//                            + "          |Profit Margin : " + project.getProfitMargin()
+//                            + "   | Total Cost : " + project.getTotalCost()
+//                            + "   | mSurface : " + project.getSurface()
+//                            + "   | Status : " + project.getStatus() );
+//                    System.out.println("+-----------------+-----------------------+----------------------+----------------------+----------------------+----------------------+----------------------+");
+//                    System.out.println("\u001B[0m|");
+//
+//                    for (Component component : project.getListComponents()) {
+//                        System.out.println("\u001B[33m +-----------------+-----------------------+----------------------+----------------------+----------------------+");
+//                        System.out.println("| Component ID : " + component.getId()
+//                                + "      | Component Name : " + component.getName()
+//                                + "          | Component Type : " + component.getComponentType()
+//                                + "   | VAT Rate : " + component.getVatRate());
+//                        System.out.println("+-----------------+-----------------------+----------------------+----------------------+----------------------+");
+//                        System.out.println("\u001B[0m|");
+//
+//                        // Material
+//                        Material material = component.getMaterial();
+//                        if (material != null) {
+//                            System.out.println("\u001B[35m +-----------------+-----------------------+----------------------+----------------------+----------------------+");
+//                            System.out.println("| Material ID : " + material.getId()
+//                                    + "      | Unit Cost : " + material.getUnitCost()
+//                                    + "          | Quantity : " + material.getQuantity()
+//                                    + "   | Transport Cost : " + material.getTransportCost()
+//                                    + "   | Quality Coefficient : " + material.getQualityCoefficient());
+//                            System.out.println("+-----------------+-----------------------+----------------------+----------------------+----------------------+");
+//                            System.out.println("\u001B[0m|");
+//                        }
+//
+//                        // Labor
+//                        Labor labor = component.getLabor();
+//                        if (labor != null) {
+//                            System.out.println("\u001B[36m +-----------------+-----------------------+----------------------+----------------------+");
+//                            System.out.println("| Labor ID : " + labor.getId()
+//                                    + "      | Hourly Rate : " + labor.getHourlyRate()
+//                                    + "          | Work Hours : " + labor.getWorkHours()
+//                                    + "   | Worker Productivity : " + labor.getWorkerProductivity());
+//                            System.out.println("+-----------------+-----------------------+----------------------+----------------------+");
+//                            System.out.println("\u001B[0m|");
+//                        }
+//                    }
+//                }
+//            }
+//        } catch (Exception e) {
+//            System.err.println("Error retrieving client and project data: " + e.getMessage());
+//        }
+//    }
 
 
     public void  manageClient(){
@@ -170,7 +170,7 @@ public class ClientView {
                     deleteClient();
                     break;
                 case 2:
-                   displayClient();
+                    displayClient();
                     break;
                 case 0:
                     exit = true;
@@ -198,10 +198,14 @@ public class ClientView {
 
 
     public void deleteClient(){
-        String name= InputUtils.readString("Entrez le nom du client  :  ");
-        Optional<Client> client = clientService.findClientByName(name);
+        int id= InputUtils.readInt("Entrez le id  du client  :  ");
+        Optional<Client> client = clientService.findById(id);
         client.ifPresentOrElse(
                 cli -> {
+                    System.out.println("Client trouvé !");
+                    System.out.println("Nom : " + cli.getName());
+                    System.out.println("Adresse : " + cli.getAddress());
+                    System.out.println("Numéro de téléphone : " + cli.getPhone());
                     String response = InputUtils.readString("Souhaitez-vous supprimé  ce client ? (y/n) : ");
                     if ("y".equalsIgnoreCase(response)) {
                         boolean isDeleted = clientService.deleteClient(cli);
