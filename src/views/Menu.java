@@ -79,6 +79,9 @@ public class Menu {
                case 3:
                   componentView.manageComponent();
                   break;
+              case 4:
+                  quoteView.manageQoute();
+                  break;
               case 0:
                   exit2 = true;
               default:

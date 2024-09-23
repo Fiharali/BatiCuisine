@@ -37,8 +37,25 @@ public class QuoteRepository implements QuoteInterface {
     }
 
     @Override
-    public Optional<Quote> findById(Quote quote) {
-        return Optional.empty();
+    public Optional<Quote> findById(Quote quote)    {
+        String sql = "SELECT * FROM quotes WHERE id = ?";
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, quote.getId());
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                quote.setEstimatedAmount(resultSet.getDouble("estimatedamount"));
+                quote.setIssueDate(resultSet.getDate("issuedate").toLocalDate());
+                quote.setValidatedDate(resultSet.getDate("validateddate").toLocalDate());
+                quote.setAccepted(resultSet.getBoolean("isaccepted"));
+                return Optional.of(quote);
+            }
+            else {
+                return Optional.empty();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
@@ -53,7 +70,15 @@ public class QuoteRepository implements QuoteInterface {
 
     @Override
     public boolean delete(Quote quote) {
-        return false;
+        String sql = "DELETE FROM quotes WHERE id = ?";
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, quote.getId());
+            int rowsAffected = statement.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }
