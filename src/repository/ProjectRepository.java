@@ -229,7 +229,9 @@ public class ProjectRepository implements ProjectInterface {
                 project.setSurface(resultSet.getDouble("surface"));
                 project.setStatus(ProjectStatus.valueOf(resultSet.getString("status")));
                 projects.add(project);
-             //   project.getClient().setName(resultSet.getString("username"));
+                Client client = new Client();
+                client.setName(resultSet.getString("username"));
+                project.setClient(client);
 
             }
             return projects;

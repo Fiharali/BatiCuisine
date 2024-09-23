@@ -228,8 +228,8 @@ public void  displayAllProjects(){
         System.out.println("Etat : " + project.getStatus());
         System.out.println("Total : " + project.getTotalCost());
         System.out.println("Marge bénéficiaire : " + project.getProfitMargin());
-      //  System.out.println("Client : " + project.getClient().getName());
-        System.out.println("--------------------------------------------------");
+        System.out.println("\u001B[36mClient : " + project.getClient().getName() + "\u001B[0m");
+        System.out.println("\u001B[31m--------------------------------------------------\u001B[0m");
     });
 }
 

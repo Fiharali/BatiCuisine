@@ -19,6 +19,10 @@ public class Quote {
         this.project = project;
     }
 
+    public Quote() {
+
+    }
+
     public LocalDate getValidatedDate() {
         return validatedDate;
     }

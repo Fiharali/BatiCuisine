@@ -20,4 +20,15 @@ public class QuoteService implements QuoteServiceInterface {
         return quoteRepository.save(quote);
 
     }
+
+    public Optional<Quote> findById(int id) {
+        Quote quote = new Quote();
+        quote.setId(id);
+        return quoteRepository.findById(quote);
+    }
+
+
+    public boolean deleteQuote(Quote quote) {
+        return quoteRepository.delete(quote);
+    }
 }

@@ -97,4 +97,85 @@ public class QuoteView {
         }
 
     }
+
+
+
+
+    public void  manageQoute(){
+
+
+        boolean exit = false;
+        while (!exit) {
+
+            System.out.println("\n  === Menu de clients ===");
+            System.out.println("\n 1. supprimer un devis  ");
+            System.out.println("\n 2. afficher un devis  ");
+           // System.out.println("\n 3. Modifier un client  ");
+            System.out.println("\n 0. retour");
+
+            int choice = InputUtils.readInt("Choisissez une option :");
+            switch (choice) {
+                case 1:
+                    deleteQoute();
+                    break;
+                case 2:
+                    displayQoute();
+                    break;
+                case 0:
+                    exit = true;
+                default:
+                    System.out.println("Option invalide. Veuillez réessayer.");
+                    break;
+            }
+        }
+    }
+
+
+    public void displayQoute(){
+        int id= InputUtils.readInt("Entrez le id  du devis  :  ");
+        Optional<Quote> quote = quoteService.findById(id);
+        quote.ifPresentOrElse(
+                quot -> {
+                    System.out.println("devis trouvé !");
+                    System.out.println(" id : " + quot.getId());
+                    System.out.println(" date de issue  : " + quot.getIssueDate());
+                    System.out.println(" date de validité  : " + quot.getValidatedDate());
+                    System.out.println(" amount  : " + quot.getEstimatedAmount());
+                    System.out.println( quot.isAccepted()? "devis accepté" : "devis non accepté");
+                },
+                () -> System.out.println("devis non trouvé.")
+        );
+    }
+
+
+
+    public void deleteQoute(){
+        int id= InputUtils.readInt("Entrez le id  du devis  :  ");
+        Optional<Quote> quote = quoteService.findById(id);
+        quote.ifPresentOrElse(
+                quot -> {
+                    System.out.println("devis trouvé !");
+                    System.out.println(" id : " + quot.getId());
+                    System.out.println(" date de issue  : " + quot.getIssueDate());
+                    System.out.println(" date de validité  : " + quot.getValidatedDate());
+                    System.out.println(" amount  : " + quot.getEstimatedAmount());
+                    System.out.println( quot.isAccepted()? "devis accepté" : "devis non accepté");
+                    String response = InputUtils.readString("Souhaitez-vous supprimé  ce devis ? (y/n) : ");
+                    if ("y".equalsIgnoreCase(response)) {
+                        boolean isDeleted = quoteService.deleteQuote(quot);
+                        if (isDeleted) {
+                            System.out.println("devis supprimé !");
+                        } else {
+                            System.out.println("devis ne peut pas être supprimé !");
+                        }
+                    } else {
+                        System.out.println("Opération annulée.");
+                    }
+                },
+                () -> System.out.println("devis non trouvé.")
+        );
+
+    }
+
+
 }
