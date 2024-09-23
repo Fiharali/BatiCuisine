@@ -23,8 +23,7 @@ public class Menu {
             System.out.println("\n 1. Créer un nouveau projet ");
             System.out.println("\n 2. Afficher les projets existants");
             System.out.println("\n 3. Calculer le coût d'un projet");
-            System.out.println("\n 4. Enregistrer  un Devis");
-            System.out.println("\n 5. Gestion des projets, clients ");
+            System.out.println("\n 4. Gestion des projets, clients,comppnents et devis");
             System.out.println("\n 0. Quitter");
             int choice = InputUtils.readInt("Choisissez une option :");
             switch (choice) {
@@ -33,15 +32,12 @@ public class Menu {
                     clientView.searchOrAjouterClient();
                     break;
                 case 2:
-                    clientView.displayClientWithProjects();
+                   projectView.displayAllProjects();
                     break;
-                 case 3:
+                case 3:
                     projectView.displayProject();
                     break;
                 case 4:
-                    quoteView.addQuoteInputs();
-                    break;
-                  case 5:
                       choiceManage();
                     break;
                 case 0:
@@ -66,6 +62,8 @@ public class Menu {
           System.out.println("\n  === Menu Principal ===");
           System.out.println("\n 1. gerér les clients  ");
           System.out.println("\n 2. gerér les projects  ");
+          System.out.println("\n 3. gerér les components  ");
+          System.out.println("\n 3. gerér les devis  ");
           System.out.println("\n 0. retour");
 
           int choice2 = InputUtils.readInt("Choisissez une option :");

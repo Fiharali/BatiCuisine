@@ -36,6 +36,13 @@ private ClientRepository clientRepository;
                     .findFirst();
     }
 
+
+    public Optional<Client> findById(int id) {
+        return allClients().stream()
+                .filter(client -> client.getId()==id)
+                .findFirst();
+    }
+
     @Override
     public boolean deleteClient(Client client) {
         return clientRepository.delete(client);

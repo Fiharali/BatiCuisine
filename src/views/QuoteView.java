@@ -83,7 +83,7 @@ public class QuoteView {
                 projectService.updateProject(project);
                 quoteService.addQuote(quote);
             } else {
-                project.setStatus(ProjectStatus.CANCELLED);
+                project.setStatus(ProjectStatus.CANCELED);
                 quoteService.addQuote(quote);
             }
 

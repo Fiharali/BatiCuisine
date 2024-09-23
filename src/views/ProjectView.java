@@ -32,7 +32,7 @@ public void  createProject(Client client) {
 
 }
 
-    public Optional<Project> getProject(int id  ){
+public Optional<Project> getProject(int id  ){
       return   projectService.find(id);
     }
 
@@ -50,7 +50,7 @@ public void  createProject(Client client) {
             System.out.println("\n  === Menu de projects ===");
             System.out.println("\n 1. supprimer un projet  ");
             System.out.println("\n 2. afficher un projet  ");
-            System.out.println("\n 3. Modifier un projet  ");
+            //System.out.println("\n 3. Modifier un projet  ");
             System.out.println("\n 0. retour");
 
             int choice = InputUtils.readInt("Choisissez une option :");
@@ -103,10 +103,16 @@ public void  createProject(Client client) {
 
 
     public void deleteProject(){
-        String name= InputUtils.readString("Entrez le nom du client  :  ");
+        String name= InputUtils.readString("Entrez le nom du projet  :  ");
         Optional<Project> project = projectService.getProjectByName(name);
         project.ifPresentOrElse(
                 prj -> {
+                    System.out.println("Projet trouvé !");
+                    System.out.println("Nom : " + prj.getName());
+                    System.out.println("surface : " + prj.getSurface());
+                    System.out.println("etat : " + prj.getStatus());
+                    System.out.println("total : " + prj.getTotalCost());
+                    System.out.println("profit  : " + prj.getProfitMargin());
                     String response = InputUtils.readString("Souhaitez-vous supprimé  ce projet ? (y/n) : ");
                     if ("y".equalsIgnoreCase(response)) {
                         boolean isDeleted = projectService.deleteProject(prj);
@@ -212,7 +218,20 @@ public void  createProject(Client client) {
     }
 
 
+public void  displayAllProjects(){
 
+    System.out.println("--- Liste des Projets ---");
+    projectService.findAll().forEach(project -> {
+        System.out.println("ID : " + project.getId());
+        System.out.println("Nom : " + project.getName());
+        System.out.println("Surface : " + project.getSurface());
+        System.out.println("Etat : " + project.getStatus());
+        System.out.println("Total : " + project.getTotalCost());
+        System.out.println("Marge bénéficiaire : " + project.getProfitMargin());
+      //  System.out.println("Client : " + project.getClient().getName());
+        System.out.println("--------------------------------------------------");
+    });
+}
 
 
 

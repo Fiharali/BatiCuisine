@@ -9,6 +9,7 @@ import repository.ComponentRepository;
 import repository.MaterialRepository;
 import repository.ProjectRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 public class ProjectService implements services.interfaces.ProjectServiceInterface {
@@ -56,6 +57,10 @@ public class ProjectService implements services.interfaces.ProjectServiceInterfa
 
     public Project updateProject(Project project) {
         return projectRepository.update(project);
+    }
+
+    public List<Project> findAll(){
+        return projectRepository.all();
     }
 
 
