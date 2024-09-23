@@ -45,7 +45,24 @@ public class ComponentRepository implements ComponentInterface {
 
     @Override
     public Optional<Component> findById(Component component) {
-        return Optional.empty();
+
+        String sql = "SELECT * FROM components WHERE id = ?";
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, component.getId());
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                component.setName(resultSet.getString("name"));
+                component.setComponentType(resultSet.getString("componenttype"));
+                component.setVatRate(resultSet.getDouble("vatrate"));
+                return Optional.of(component);
+            }
+            else {
+                return Optional.empty();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
@@ -60,6 +77,15 @@ public class ComponentRepository implements ComponentInterface {
 
     @Override
     public boolean delete(Component component) {
-        return false;
+
+        String sql = "DELETE FROM components WHERE id = ?";
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, component.getId());
+            int rowsAffected = statement.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

@@ -8,6 +8,8 @@ import repository.ComponentRepository;
 import services.interfaces.ComponentServiceInterface;
 import services.interfaces.LaborServiceInterface;
 
+import java.util.Optional;
+
 public class ComponentService implements ComponentServiceInterface {
 
     private ComponentRepository componentRepository ;
@@ -45,5 +47,17 @@ public class ComponentService implements ComponentServiceInterface {
            return laborService.addLaborToProject(labor,component);
        };
        return false;
+    }
+
+
+    public Optional<Component> findById(int id){
+        Component component = new Component();
+        component.setId(id);
+        return componentRepository.findById(component);
+    }
+
+
+    public boolean deleteComponent(Component component) {
+        return componentRepository.delete(component);
     }
 }

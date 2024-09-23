@@ -7,12 +7,14 @@ public class Menu {
     public ClientView clientView;
     public ProjectView projectView;
     public QuoteView quoteView;
+    public ComponentView componentView;
 
 
     public  Menu(){
          clientView = new ClientView();
          projectView = new ProjectView();
          quoteView = new QuoteView();
+         componentView = new ComponentView();
     }
 
     public  void mainMenu()  {
@@ -73,6 +75,9 @@ public class Menu {
                   break;
               case 2:
                   projectView.manageProject();
+                  break;
+               case 3:
+                  componentView.manageComponent();
                   break;
               case 0:
                   exit2 = true;
