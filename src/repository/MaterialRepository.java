@@ -16,7 +16,7 @@ public class MaterialRepository implements MaterialInterface {
     private Connection connection;
 
     public MaterialRepository() {
-        this.connection = DBConnection.getConnection();
+        this.connection =  DBConnection.getInstance().getConnection();
     }
 
 

@@ -15,7 +15,7 @@ public class ClientRepository implements ClientInterface {
 
     private Connection connection;
     public ClientRepository() {
-        this.connection = DBConnection.getConnection();
+        this.connection =  DBConnection.getInstance().getConnection();
     }
 
 
@@ -85,8 +85,8 @@ public class ClientRepository implements ClientInterface {
                 "LEFT JOIN Labor l ON comp.id = l.component_id";
 
         try {
-            Connection conn = DBConnection.getConnection();
-            Statement stmt = conn.createStatement();
+
+            Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery(query);
 
             while (rs.next()) {

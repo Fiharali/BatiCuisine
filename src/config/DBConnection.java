@@ -1,6 +1,5 @@
 package config;
 
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -12,23 +11,31 @@ public class DBConnection {
     private static final String PASSWORD = System.getenv("db.password");
     private static final String DB_NAME = System.getenv("db.name");
 
-    private static Connection connection;
+    private static DBConnection instance;
 
-    public static Connection getConnection() {
-       if (connection == null) {
-           synchronized (DBConnection.class) {
-                    try {
-                        Class.forName("org.postgresql.Driver");
-                        connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/baticuisine", "ali", "ali");
+    private Connection connection;
 
-                    } catch (ClassNotFoundException | SQLException e) {
-                        throw new RuntimeException("Failed to connect to the databases", e);
-                    }
-
-          }
-       }
-
-        return connection;
+    private DBConnection() {
+        try {
+            Class.forName("org.postgresql.Driver");
+            connection = DriverManager.getConnection(DB_URL + DB_NAME, USERNAME, PASSWORD);
+        } catch (ClassNotFoundException | SQLException e) {
+            throw new RuntimeException("Failed to connect to the database", e);
+        }
     }
 
+    public static DBConnection getInstance() {
+        if (instance == null) {
+            synchronized (DBConnection.class) {
+                if (instance == null) {
+                    instance = new DBConnection();
+                }
+            }
+        }
+        return instance;
+    }
+
+    public Connection getConnection() {
+        return connection;
+    }
 }

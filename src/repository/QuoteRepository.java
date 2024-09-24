@@ -13,7 +13,7 @@ public class QuoteRepository implements QuoteInterface {
     private Connection connection;
 
     public QuoteRepository() {
-        this.connection = DBConnection.getConnection();
+        this.connection =  DBConnection.getInstance().getConnection();
     }
 
 

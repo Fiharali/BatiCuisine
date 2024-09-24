@@ -14,7 +14,7 @@ import java.util.Optional;
 public class ComponentRepository implements ComponentInterface {
     private Connection connection;
     public ComponentRepository() {
-        this.connection = DBConnection.getConnection();
+        this.connection = DBConnection.getInstance().getConnection();
     }
 
 

@@ -16,7 +16,7 @@ public class LaborRebository  implements LaborInterface {
     private Connection connection;
 
     public LaborRebository() {
-        this.connection = DBConnection.getConnection();
+        this.connection =  DBConnection.getInstance().getConnection();
     }
 
     public Labor save(Labor labor) {

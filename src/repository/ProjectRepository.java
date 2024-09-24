@@ -17,7 +17,7 @@ public class ProjectRepository implements ProjectInterface {
     private Connection connection;
 
     public ProjectRepository() {
-        this.connection = DBConnection.getConnection();
+        this.connection =  DBConnection.getInstance().getConnection();
     }
 
 
@@ -111,8 +111,8 @@ public class ProjectRepository implements ProjectInterface {
                 "LEFT JOIN Labor l ON comp.id = l.component_id " +
                 "WHERE p.projectName = ?";
 
-        try (Connection conn = DBConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(query)) {
+        try {
+             PreparedStatement stmt = connection.prepareStatement(query) ;
 
 
             stmt.setString(1, project.getName());
