@@ -19,6 +19,7 @@ public class InputUtils {
             System.out.print(prompt);
             try {
                 value = scanner.nextInt();
+               scanner.nextLine();
                 valid = true;
             } catch (InputMismatchException e) {
                 System.out.println("Erreur : La valeur doit être un nombre entier.");
@@ -52,6 +53,7 @@ public class InputUtils {
             System.out.print(prompt);
             try {
                 value = scanner.nextDouble();
+                scanner.nextLine();
                 valid = true;
             } catch (InputMismatchException e) {
                 System.out.println("Erreur : La valeur doit être un nombre double.");

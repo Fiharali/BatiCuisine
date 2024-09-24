@@ -9,11 +9,4 @@ public interface LaborInterface {
 
     public Labor save(Labor labor);
 
-    public Optional<Labor> findById(Labor labor);
-
-    public List<Labor> all();
-
-    public Labor update(Labor labor);
-
-    public boolean delete(Labor labor);
 }

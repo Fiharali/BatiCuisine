@@ -151,6 +151,7 @@ public class ClientRepository implements ClientInterface {
 
 
     }
+
     private Client findOrCreateClient(List<Client> clients, int clientId) {
         for (Client client : clients) {
             if (client.getId() == clientId) {
@@ -183,10 +184,6 @@ public class ClientRepository implements ClientInterface {
         }
 
 
-    @Override
-    public Client update(Client client) {
-        return null;
-    }
 
     @Override
     public boolean delete(Client client) {

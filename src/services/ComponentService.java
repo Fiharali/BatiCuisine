@@ -6,7 +6,6 @@ import domain.entities.Material;
 import domain.entities.Project;
 import repository.ComponentRepository;
 import services.interfaces.ComponentServiceInterface;
-import services.interfaces.LaborServiceInterface;
 
 import java.util.Optional;
 
@@ -49,14 +48,14 @@ public class ComponentService implements ComponentServiceInterface {
        return false;
     }
 
-
+    @Override
     public Optional<Component> findById(int id){
         Component component = new Component();
         component.setId(id);
         return componentRepository.findById(component);
     }
 
-
+    @Override
     public boolean deleteComponent(Component component) {
         return componentRepository.delete(component);
     }

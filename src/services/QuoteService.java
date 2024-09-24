@@ -21,14 +21,15 @@ public class QuoteService implements QuoteServiceInterface {
 
     }
 
+    @Override
     public Optional<Quote> findById(int id) {
         Quote quote = new Quote();
         quote.setId(id);
         return quoteRepository.findById(quote);
     }
 
-
+    @Override
     public boolean deleteQuote(Quote quote) {
-        return quoteRepository.delete(quote);
-    }
+            return quoteRepository.delete(quote);
+        }
 }
