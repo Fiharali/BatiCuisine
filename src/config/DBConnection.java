@@ -22,7 +22,7 @@ public class DBConnection {
                         connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/baticuisine", "ali", "ali");
 
                     } catch (ClassNotFoundException | SQLException e) {
-                        throw new RuntimeException("Failed to connect to the database", e);
+                        throw new RuntimeException("Failed to connect to the databases", e);
                     }
 
           }
