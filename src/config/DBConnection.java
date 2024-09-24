@@ -25,7 +25,7 @@ public class DBConnection {
                         throw new RuntimeException("Failed to connect to the database", e);
                     }
 
-           }
+          }
        }
 
         return connection;
