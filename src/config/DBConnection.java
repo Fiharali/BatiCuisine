@@ -19,13 +19,13 @@ public class DBConnection {
            synchronized (DBConnection.class) {
                     try {
                         Class.forName("org.postgresql.Driver");
-                        connection = DriverManager.getConnection(DB_URL + DB_NAME, USERNAME, PASSWORD);
+                        connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/baticuisine", "ali", "ali");
 
                     } catch (ClassNotFoundException | SQLException e) {
                         throw new RuntimeException("Failed to connect to the database", e);
                     }
 
-            }
+           }
        }
 
         return connection;
